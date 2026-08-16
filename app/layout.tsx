@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google'
+import { Geist, Geist_Mono, Playfair_Display, Outfit } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
 import { UpgradeGateProvider } from '@/components/upgrade-gate'
 import './globals.css'
@@ -12,6 +12,11 @@ const geistMono = Geist_Mono({
 const playfair = Playfair_Display({
   variable: '--font-playfair',
   subsets: ['latin'],
+})
+const outfit = Outfit({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
 })
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vertex-ai.app'
@@ -55,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${outfit.variable}`}
     >
       <body className="bg-background font-sans antialiased">
         <AuthProvider>

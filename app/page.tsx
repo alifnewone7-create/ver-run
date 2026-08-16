@@ -1,5 +1,5 @@
-import { ClayLanding } from '@/components/clay-landing'
+import { VertexLanding } from '@/components/vertex-landing'
 
 export default function Home() {
-  return <ClayLanding />
+  return <VertexLanding />
 }

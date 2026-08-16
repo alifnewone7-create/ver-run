@@ -1,0 +1,88 @@
+{
+  "theme": "dark",
+  "typography": {
+    "google_fonts_import": "@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');",
+    "primary_font": "'Outfit', sans-serif",
+    "headings": "font-outfit tracking-tight font-semibold",
+    "body": "font-outfit font-light tracking-wide",
+    "hierarchy": {
+      "h1": "text-4xl md:text-5xl lg:text-7xl leading-tight text-white",
+      "h2": "text-3xl md:text-4xl text-white font-medium tracking-tight",
+      "h3": "text-xl md:text-2xl text-zinc-100",
+      "body": "text-base text-zinc-400",
+      "labels": "text-xs uppercase tracking-[0.2em] text-zinc-500"
+    }
+  },
+  "colors": {
+    "background_base": "#020302",
+    "surface": "#0a0c0a",
+    "surface_glass": "rgba(10, 12, 10, 0.6)",
+    "border_subtle": "rgba(255, 255, 255, 0.08)",
+    "border_highlight": "rgba(204, 255, 0, 0.3)",
+    "lime_primary": "#CCFF00",
+    "lime_hover": "#b3e600",
+    "lime_glow": "rgba(204, 255, 0, 0.15)",
+    "text_main": "#ffffff",
+    "text_muted": "#a1a1aa"
+  },
+  "styling_and_css_variables": {
+    "instructions_to_main_agent": "Completely remove the old 'clay-card', 'clay-inset', 'clay-chip', 'btn-clay' classes. Replace them with the modern, luxury, minimal glass styles defined below. The goal is a highly professional, dark-mode fintech aesthetic. Remove the scrolling market ticker marquee and the Next.js dev badge.",
+    "background_gradient": "Apply a fixed, professional, subtle background gradient to the main wrapper to achieve the requested 'black and lime gradient' solid style: 'bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#132600] via-[#020302] to-[#020302]'. It should feel dark and premium, not overpowering.",
+    "components": {
+      "glass_card": "backdrop-blur-xl bg-white/[0.02] border border-white/[0.08] hover:border-[#ccff00]/40 transition-all duration-300 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
+      "button_primary": "bg-[#CCFF00] text-black font-semibold hover:bg-[#b3e600] hover:scale-[1.02] active:scale-95 transition-all rounded-full px-8 py-3 shadow-[0_0_20px_rgba(204,255,0,0.2)]",
+      "button_secondary": "bg-transparent border border-white/20 text-white hover:bg-white/5 hover:border-white/40 active:scale-95 transition-all rounded-full px-8 py-3"
+    }
+  },
+  "layout_and_sections": {
+    "navbar": {
+      "style": "sticky top-0 z-50 backdrop-blur-2xl bg-[#020302]/80 border-b border-white/10",
+      "content": "Keep Logo image + 'Vertex AI' text. Links: Features, How it works, Pricing, Support. Primary CTA: 'Get Vertex AI' -> /login. Include mobile hamburger menu that opens a solid #020302 background overlay."
+    },
+    "hero": {
+      "structure": "Centered vertical layout with massive padding (py-32).",
+      "elements": [
+        "H1: 'Trade with Intelligence. Win with Vertex AI.' (Massive, tracking-tighter)",
+        "Subcopy: Clean minimal paragraph (max-w-2xl mx-auto).",
+        "Buttons: Primary 'Get Vertex AI' and Secondary 'View Pricing' centered in a row.",
+        "Hero Card: A minimal, wide glass card positioned directly below. It ONLY contains the animated SVG candlestick chart with the floating 'BUY' marker and the bottom caption 'Powered by Vertex AI real-time algorithm'.",
+        "CRITICAL REMOVALS: Strip out the 'AI Signal Engine v4.2' badge. Strip out the 'Vertex Neural Core / Live scanning markets / 98.6% signal accuracy' header block from the card."
+      ]
+    },
+    "stats_row": {
+      "structure": "Grid of 4 items (grid-cols-2 md:grid-cols-4) with generous spacing (py-12).",
+      "style": "Data points should have massive numbers in Lime (#CCFF00) and small uppercase labels in Zinc-400."
+    },
+    "features": {
+      "structure": "Bento-style or 3-column dense grid (grid-cols-1 md:grid-cols-3) gap-6. Add generous padding inside cards (p-8).",
+      "style": "Use the glass_card style. Lucide icons must be colored in Lime (#CCFF00)."
+    },
+    "how_it_works": {
+      "structure": "3 items. Use a horizontal grid (md:grid-cols-3) or a vertical timeline approach.",
+      "style": "Use large faint numbers (e.g., text-white/5) positioned absolutely in the background of the card, with clean foreground text."
+    },
+    "pricing": {
+      "structure": "2 side-by-side cards (grid-cols-1 md:grid-cols-2) gap-8 max-w-5xl mx-auto.",
+      "free_plan": "Standard glass card style. Buttons: 'Create Quotex Account' and 'Contact Admin' (secondary style).",
+      "paid_plan": "Highlight card: Use a solid Lime border border-[#ccff00]/50, a subtle lime inner glow, and 'Purchase License' button in primary lime style."
+    },
+    "cta_band": {
+      "structure": "py-24 text-center. Large H2 'Start your trading career with Vertex AI'.",
+      "style": "Dark container with a radial lime spotlight bg behind the text. Button: 'Create free account' -> /registration in primary lime style."
+    },
+    "footer": {
+      "style": "py-12 border-t border-white/10 text-sm text-zinc-500. Flex layout for logo, Privacy Policy, Support, disclaimer, copyright."
+    }
+  },
+  "motion_and_interactions": {
+    "hover_states": "All buttons must have explicit hover states (color change + slight scale). Cards should have border highlight transitions on hover.",
+    "entrance_animations": "Use Framer Motion to stagger-fade-in sections (initial={ opacity: 0, y: 20 }, whileInView={ opacity: 1, y: 0 })."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do NOT use standard Inter font for headers; strictly use the imported 'Outfit' font.",
+    "Do NOT center align the entire App container; only center-align specific sections like Hero and CTA band.",
+    "All interactive elements (buttons, links) MUST include a 'data-testid' attribute (e.g., data-testid='hero-cta-button').",
+    "Never use pure transparent backgrounds on sticky/fixed overlays; always use bg-[color]/[opacity] with backdrop-blur.",
+    "Ensure the design remains responsive, adapting gracefully from mobile (px-4, grid-cols-1) to desktop."
+  ]
+}
