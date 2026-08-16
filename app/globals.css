@@ -200,21 +200,19 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Cinematic black → lime gradient canvas */
+    /* Minimal editorial grade: one lime light source over deep ink */
     background-image:
-      radial-gradient(46rem 34rem at 4% -4%, oklch(0.78 0.2 130 / 0.28), transparent 66%),
-      radial-gradient(40rem 32rem at 104% 88%, oklch(0.7 0.18 134 / 0.22), transparent 68%),
-      radial-gradient(52rem 36rem at 46% 112%, oklch(0.6 0.14 130 / 0.14), transparent 72%),
+      radial-gradient(60rem 40rem at 12% -10%, oklch(0.72 0.16 132 / 0.2), transparent 62%),
+      radial-gradient(48rem 34rem at 92% 108%, oklch(0.66 0.13 134 / 0.12), transparent 66%),
       linear-gradient(
-        166deg,
-        oklch(0.2 0.07 130) 0%,
-        oklch(0.14 0.045 131) 30%,
-        oklch(0.095 0.024 132) 62%,
-        oklch(0.06 0.01 134) 100%
+        174deg,
+        oklch(0.155 0.035 132) 0%,
+        oklch(0.115 0.022 133) 46%,
+        oklch(0.085 0.012 134) 100%
       );
     background-attachment: fixed;
   }
-  /* Ambient lime glow orbs for depth */
+  /* single soft lime bloom for depth (static, no drift) */
   body::before {
     content: '';
     position: fixed;
@@ -222,32 +220,19 @@
     z-index: -1;
     pointer-events: none;
     background-image:
-      radial-gradient(28rem 28rem at 12% 18%, oklch(0.88 0.22 128 / 0.24), transparent 70%),
-      radial-gradient(32rem 32rem at 92% 80%, oklch(0.74 0.18 134 / 0.18), transparent 70%),
-      radial-gradient(24rem 24rem at 58% 2%, oklch(0.82 0.2 126 / 0.12), transparent 72%);
-    filter: blur(100px) saturate(1.1);
-    animation: orbDrift 28s ease-in-out infinite alternate;
+      radial-gradient(34rem 30rem at 10% 6%, oklch(0.86 0.2 130 / 0.14), transparent 72%),
+      radial-gradient(30rem 26rem at 96% 92%, oklch(0.74 0.16 134 / 0.08), transparent 74%);
+    filter: blur(120px);
   }
-  @keyframes orbDrift {
-    0%   { transform: translate3d(0, 0, 0) scale(1); }
-    50%  { transform: translate3d(2%, -1.5%, 0) scale(1.06); }
-    100% { transform: translate3d(-1.5%, 1.5%, 0) scale(0.98); }
-  }
-  /* Fine grain + technical grid for a premium finish */
+  /* barely-there grain only — no grid */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
-      linear-gradient(oklch(0.85 0.22 128 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(0.85 0.22 128 / 0.045) 1px, transparent 1px);
-    background-size:
-      160px 160px,
-      96px 96px,
-      96px 96px;
-    opacity: 0.4;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.28;
   }
   /* hero candle chart motion */
   .candle-in {
