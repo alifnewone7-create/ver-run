@@ -9,6 +9,7 @@ const nextConfig = {
     '**.emergentcf.cloud',
     '**.emergent.host',
   ],
+  devIndicators: false,
   typescript: {
     ignoreBuildErrors: true,
   },
