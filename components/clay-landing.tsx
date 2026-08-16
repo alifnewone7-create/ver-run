@@ -217,85 +217,125 @@ function ClayNavbar() {
 
 /* ─────────────────────────── hero terminal ─────────────────────────── */
 
+/* candles: [open, close, high, low] in a 0-100 price space */
+const CANDLES: [number, number, number, number][] = [
+  [38, 48, 54, 33], [46, 42, 51, 38], [43, 51, 57, 40], [50, 39, 53, 34],
+  [40, 45, 50, 36], [45, 62, 68, 43], [61, 57, 66, 52], [56, 47, 60, 44],
+  [48, 55, 61, 45], [54, 44, 58, 40], [45, 39, 49, 34], [40, 47, 52, 37],
+  [46, 41, 50, 37], [42, 52, 58, 39], [51, 46, 55, 42], [47, 56, 62, 44],
+  [55, 61, 67, 51], [60, 72, 78, 57], [71, 66, 76, 62], [67, 74, 80, 64],
+]
+
+function CandleChart() {
+  const W = 520
+  const H = 230
+  const padX = 26
+  const step = (W - padX * 2) / (CANDLES.length - 1)
+  const y = (v: number) => H - 30 - ((v - 28) / 56) * (H - 96)
+  const x = (i: number) => padX + i * step
+  const path = CANDLES.map((c, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y((c[0] + c[1]) / 2).toFixed(1)}`).join(' ')
+  const signalIdx = 5
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-full w-full" role="img" aria-label="AI detected candlestick pattern with a buy signal">
+      <defs>
+        <linearGradient id="vx-up" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="oklch(0.9 0.24 128)" />
+          <stop offset="100%" stopColor="oklch(0.7 0.22 132)" />
+        </linearGradient>
+        <linearGradient id="vx-dn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="oklch(0.72 0.21 22)" />
+          <stop offset="100%" stopColor="oklch(0.56 0.2 22)" />
+        </linearGradient>
+      </defs>
+
+      {/* trend spine */}
+      <path
+        d={path}
+        fill="none"
+        stroke="oklch(0.85 0.2 128 / 0.5)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeDasharray="6 7"
+        className="spine-flow"
+        vectorEffect="non-scaling-stroke"
+      />
+
+      {CANDLES.map((c, i) => {
+        const [o, cl, h, l] = c
+        const up = cl >= o
+        const bodyTop = y(Math.max(o, cl))
+        const bodyH = Math.max(6, y(Math.min(o, cl)) - bodyTop)
+        return (
+          <g key={i} className="candle-in" style={{ animationDelay: `${i * 55}ms` }}>
+            <line
+              x1={x(i)}
+              x2={x(i)}
+              y1={y(h)}
+              y2={y(l)}
+              stroke={up ? 'oklch(0.8 0.2 128)' : 'oklch(0.64 0.2 22)'}
+              strokeWidth="2"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+            />
+            <rect
+              x={x(i) - 5.5}
+              y={bodyTop}
+              width="11"
+              height={bodyH}
+              rx="2"
+              fill={up ? 'url(#vx-up)' : 'url(#vx-dn)'}
+            />
+          </g>
+        )
+      })}
+
+      {/* buy marker */}
+      <g transform={`translate(${x(signalIdx)}, ${y(CANDLES[signalIdx][2]) - 22})`}>
+        <g className="buy-pop">
+          <rect x="-31" y="-13" width="62" height="26" rx="13" fill="oklch(0.15 0.03 130)" stroke="oklch(0.85 0.22 128 / 0.55)" vectorEffect="non-scaling-stroke" />
+          <circle cx="-19" cy="0" r="3.6" fill="oklch(0.88 0.24 128)" />
+          <text x="-11" y="4.5" fill="oklch(0.96 0.02 128)" fontSize="11" fontWeight="800" letterSpacing="0.6">BUY</text>
+        </g>
+      </g>
+    </svg>
+  )
+}
+
 function HeroTerminal() {
   return (
-    <div className="clay-card relative min-w-0 p-4 sm:p-6">
-      {/* window chrome */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="clay-dot h-3 w-3 bg-[oklch(0.68_0.22_25)]" />
-          <span className="clay-dot h-3 w-3 bg-[oklch(0.85_0.16_95)]" />
-          <span className="clay-dot h-3 w-3 bg-primary" />
-        </div>
-        <span className="mono-label flex items-center gap-2">
-          <span className="status-dot" />
-          vertex core // online
-        </span>
-      </div>
-
-      {/* robot core */}
-      <div className="clay-inset mt-4 flex items-center gap-4 p-4 sm:gap-5 sm:p-5">
-        <div className="clay-chip-lime clay-float h-16 w-16 shrink-0 rounded-[20px] sm:h-20 sm:w-20">
-          <Bot className="h-8 w-8 sm:h-10 sm:w-10" />
+    <div className="clay-card relative min-w-0 p-4 sm:p-6" data-testid="hero-neural-core-card">
+      {/* header row */}
+      <div className="flex items-center gap-3 sm:gap-4">
+        <div className="clay-chip-lime clay-float grid h-12 w-12 shrink-0 place-items-center rounded-[16px] sm:h-14 sm:w-14">
+          <Bot className="h-6 w-6 sm:h-7 sm:w-7" />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-bold sm:text-base">Vertex Neural Core</p>
-          <p className="mt-0.5 truncate text-xs text-muted-foreground sm:text-sm">
-            Scanning 40+ markets · pattern lock engaged
+          <p className="truncate text-base font-bold tracking-tight sm:text-lg">Vertex Neural Core</p>
+          <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground sm:text-sm">
+            <span className="status-dot status-dot--up" />
+            Live · scanning markets
           </p>
-          {/* equalizer */}
-          <div className="mt-2.5 flex h-6 items-end gap-1" aria-hidden="true">
-            {[0.9, 0.5, 1, 0.4, 0.75, 0.55, 0.95, 0.35, 0.7, 0.5, 0.85, 0.45].map((d, i) => (
-              <span
-                key={i}
-                className="eq-bar w-1.5 rounded-full bg-primary/80"
-                style={{ height: '100%', animationDelay: `${i * 0.12}s`, animationDuration: `${1 + d}s` }}
-              />
-            ))}
-          </div>
         </div>
-        <div className="hidden shrink-0 text-right sm:block">
-          <p className="text-2xl font-extrabold tracking-tight text-primary">98.6%</p>
-          <p className="mono-label mt-1">accuracy</p>
+        <div className="shrink-0 text-right">
+          <p className="text-xl font-extrabold tracking-[0.06em] text-primary sm:text-2xl" data-testid="hero-accuracy-value">
+            98.6%
+          </p>
+          <p className="mono-label mt-1">signal accuracy</p>
         </div>
       </div>
 
-      {/* live signals */}
-      <div className="mt-3 flex flex-col gap-2.5">
-        {TERMINAL_SIGNALS.map((s) => (
-          <div key={s.pair} className="clay-inset flex items-center gap-3 px-4 py-3">
-            <span className={`status-dot ${s.up ? 'status-dot--up' : 'status-dot--down'}`} />
-            <span className="w-20 text-sm font-bold tracking-tight sm:w-24">{s.pair}</span>
-            <span className="mono-label hidden flex-1 sm:block">confidence {s.conf}%</span>
-            {/* confidence meter */}
-            <span className="clay-inset relative hidden h-2 w-20 overflow-hidden rounded-full sm:block lg:w-28">
-              <span
-                className="absolute inset-y-0 left-0 rounded-full bg-primary"
-                style={{ width: `${s.conf}%` }}
-              />
-            </span>
-            <span
-              className={`ml-auto inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-extrabold ${
-                s.up
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-[oklch(0.68_0.22_25)] text-white'
-              }`}
-              style={{ boxShadow: 'inset 0 1.5px 0 rgb(255 255 255 / 0.35), inset 0 -2px 0 rgb(0 0 0 / 0.25)' }}
-            >
-              {s.up ? <ArrowUpRight className="h-3.5 w-3.5" /> : <ArrowDownRight className="h-3.5 w-3.5" />}
-              {s.dir}
-            </span>
-          </div>
-        ))}
+      {/* chart panel */}
+      <div className="clay-inset mt-5 overflow-hidden rounded-[22px] p-3 sm:p-4" data-testid="hero-candle-chart">
+        <div className="h-40 w-full sm:h-48">
+          <CandleChart />
+        </div>
       </div>
 
       {/* footer strip */}
-      <div className="mt-4 flex items-center justify-between">
-        <span className="mono-label flex items-center gap-1.5">
-          <CircuitBoard className="h-3.5 w-3.5" />
-          model v4.2 · latency 0.18s
-        </span>
-        <span className="mono-label text-primary">live feed</span>
+      <div className="mt-4 flex items-center justify-center gap-2">
+        <CircuitBoard className="h-3.5 w-3.5 text-primary" />
+        <span className="text-xs text-muted-foreground sm:text-sm">Powered by Vertex AI real-time algorithm</span>
       </div>
     </div>
   )

@@ -200,18 +200,18 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Black → lime gradient grade (professional, single-hue) */
-    background-color: oklch(0.06 0.008 128);
+    /* Black → soft lime grading (professional, single-hue, low contrast) */
+    background-color: oklch(0.07 0.006 130);
     background-image:
-      radial-gradient(38rem 30rem at 8% 4%, oklch(0.72 0.2 128 / 0.3), transparent 66%),
-      radial-gradient(34rem 28rem at 100% 92%, oklch(0.68 0.19 132 / 0.24), transparent 68%),
-      radial-gradient(46rem 34rem at 50% 120%, oklch(0.55 0.14 130 / 0.16), transparent 72%),
+      radial-gradient(42rem 32rem at 6% 2%, oklch(0.7 0.12 130 / 0.16), transparent 70%),
+      radial-gradient(38rem 30rem at 102% 96%, oklch(0.66 0.1 134 / 0.12), transparent 72%),
+      radial-gradient(50rem 34rem at 50% 118%, oklch(0.55 0.08 130 / 0.09), transparent 74%),
       linear-gradient(
         168deg,
-        oklch(0.13 0.05 128) 0%,
-        oklch(0.09 0.03 130) 34%,
-        oklch(0.06 0.014 132) 68%,
-        oklch(0.04 0.006 134) 100%
+        oklch(0.115 0.026 130) 0%,
+        oklch(0.095 0.018 131) 38%,
+        oklch(0.075 0.01 132) 72%,
+        oklch(0.055 0.005 134) 100%
       );
     background-attachment: fixed;
   }
@@ -223,12 +223,12 @@
     z-index: -1;
     pointer-events: none;
     background-image:
-      radial-gradient(24rem 24rem at 16% 22%, oklch(0.85 0.24 128 / 0.3), transparent 70%),
-      radial-gradient(28rem 28rem at 88% 74%, oklch(0.7 0.2 132 / 0.24), transparent 70%),
-      radial-gradient(20rem 20rem at 62% 6%, oklch(0.8 0.22 126 / 0.16), transparent 72%);
-    filter: blur(90px) saturate(1.1);
+      radial-gradient(26rem 26rem at 14% 20%, oklch(0.86 0.2 128 / 0.16), transparent 72%),
+      radial-gradient(30rem 30rem at 90% 78%, oklch(0.72 0.16 132 / 0.13), transparent 72%),
+      radial-gradient(22rem 22rem at 60% 4%, oklch(0.8 0.16 126 / 0.09), transparent 74%);
+    filter: blur(110px) saturate(1.05);
     opacity: 1;
-    animation: orbDrift 26s ease-in-out infinite alternate;
+    animation: orbDrift 30s ease-in-out infinite alternate;
   }
   @keyframes orbDrift {
     0%   { transform: translate3d(0, 0, 0) scale(1); }
@@ -247,9 +247,36 @@
       linear-gradient(90deg, oklch(0.85 0.22 128 / 0.05) 1px, transparent 1px);
     background-size:
       160px 160px,
-      72px 72px,
-      72px 72px;
-    opacity: 0.5;
+      88px 88px,
+      88px 88px;
+    opacity: 0.35;
+  }
+  /* hero candle chart motion */
+  .candle-in {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    animation: candleRise 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes candleRise {
+    from { opacity: 0; transform: translateY(10px) scaleY(0.6); }
+    to   { opacity: 1; transform: translateY(0) scaleY(1); }
+  }
+  .spine-flow {
+    animation: spineDash 2.4s linear infinite;
+  }
+  @keyframes spineDash {
+    to { stroke-dashoffset: -22; }
+  }
+  .buy-pop {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: buyPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.85s forwards;
+  }
+  @keyframes buyPop {
+    from { opacity: 0; transform: translateY(6px) scale(0.85); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
   html {
     @apply font-sans;
