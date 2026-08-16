@@ -305,28 +305,8 @@ function CandleChart() {
 function HeroTerminal() {
   return (
     <div className="clay-card relative min-w-0 p-4 sm:p-6" data-testid="hero-neural-core-card">
-      {/* header row */}
-      <div className="flex items-center gap-3 sm:gap-4">
-        <div className="clay-chip-lime clay-float grid h-12 w-12 shrink-0 place-items-center rounded-[16px] sm:h-14 sm:w-14">
-          <Bot className="h-6 w-6 sm:h-7 sm:w-7" />
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-base font-bold tracking-tight sm:text-lg">Vertex Neural Core</p>
-          <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground sm:text-sm">
-            <span className="status-dot status-dot--up" />
-            Live · scanning markets
-          </p>
-        </div>
-        <div className="shrink-0 text-right">
-          <p className="text-xl font-extrabold tracking-[0.06em] text-primary sm:text-2xl" data-testid="hero-accuracy-value">
-            98.6%
-          </p>
-          <p className="mono-label mt-1">signal accuracy</p>
-        </div>
-      </div>
-
       {/* chart panel */}
-      <div className="clay-inset mt-5 overflow-hidden rounded-[22px] p-3 sm:p-4" data-testid="hero-candle-chart">
+      <div className="clay-inset overflow-hidden rounded-[22px] p-3 sm:p-4" data-testid="hero-candle-chart">
         <div className="h-40 w-full sm:h-48">
           <CandleChart />
         </div>
