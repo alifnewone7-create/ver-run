@@ -384,31 +384,6 @@ function ClayHero() {
   )
 }
 
-function ClayTicker() {
-  const items = [...TICKER, ...TICKER]
-  return (
-    <section aria-label="Live market ticker" className="mx-auto max-w-6xl px-4 sm:px-6">
-      <div className="clay-inset overflow-hidden rounded-2xl py-3.5">
-        <div className="marquee-track flex w-max items-center gap-8 px-4">
-          {items.map((t, i) => (
-            <span key={`${t.pair}-${i}`} className="flex items-center gap-2 whitespace-nowrap">
-              <span className="text-xs font-bold tracking-wide">{t.pair}</span>
-              <span
-                className={`flex items-center gap-0.5 text-xs font-semibold ${
-                  t.up ? 'text-primary' : 'text-[oklch(0.72_0.19_25)]'
-                }`}
-              >
-                {t.up ? <ArrowUpRight className="h-3.5 w-3.5" /> : <ArrowDownRight className="h-3.5 w-3.5" />}
-                {t.change}
-              </span>
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function ClayFeatures() {
   return (
     <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 lg:py-24">
@@ -668,7 +643,6 @@ export function ClayLanding() {
       <ClayNavbar />
       <main>
         <ClayHero />
-        <ClayTicker />
         <ClayFeatures />
         <ClaySteps />
         <ClayPricing />
