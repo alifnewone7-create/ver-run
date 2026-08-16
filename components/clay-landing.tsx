@@ -329,12 +329,7 @@ function ClayHero() {
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
         {/* copy */}
         <div className="text-center lg:text-left">
-          <span className="clay-chip gap-2 rounded-full px-4 py-2 text-xs font-semibold text-muted-foreground">
-            <span className="status-dot" />
-            AI Signal Engine · v4.2 live
-          </span>
-
-          <h1 className="mt-6 text-balance text-4xl font-extrabold leading-[1.06] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="text-balance text-4xl font-extrabold leading-[1.06] tracking-tight sm:text-5xl lg:text-6xl">
             Trade with Intelligence.{' '}
             <span className="text-primary">Win with Vertex AI.</span>
           </h1>
