@@ -200,21 +200,54 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Solid lime-tinted ink canvas — flat, uniform (no gradients) */
-    background-image: none;
+    /* Cinematic black → lime gradient canvas */
+    background-image:
+      radial-gradient(46rem 34rem at 4% -4%, oklch(0.78 0.2 130 / 0.28), transparent 66%),
+      radial-gradient(40rem 32rem at 104% 88%, oklch(0.7 0.18 134 / 0.22), transparent 68%),
+      radial-gradient(52rem 36rem at 46% 112%, oklch(0.6 0.14 130 / 0.14), transparent 72%),
+      linear-gradient(
+        166deg,
+        oklch(0.2 0.07 130) 0%,
+        oklch(0.14 0.045 131) 30%,
+        oklch(0.095 0.024 132) 62%,
+        oklch(0.06 0.01 134) 100%
+      );
+    background-attachment: fixed;
   }
-  /* flat canvas: no ambient orbs */
+  /* Ambient lime glow orbs for depth */
   body::before {
-    content: none;
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(28rem 28rem at 12% 18%, oklch(0.88 0.22 128 / 0.24), transparent 70%),
+      radial-gradient(32rem 32rem at 92% 80%, oklch(0.74 0.18 134 / 0.18), transparent 70%),
+      radial-gradient(24rem 24rem at 58% 2%, oklch(0.82 0.2 126 / 0.12), transparent 72%);
+    filter: blur(100px) saturate(1.1);
+    animation: orbDrift 28s ease-in-out infinite alternate;
   }
   @keyframes orbDrift {
     0%   { transform: translate3d(0, 0, 0) scale(1); }
     50%  { transform: translate3d(2%, -1.5%, 0) scale(1.06); }
     100% { transform: translate3d(-1.5%, 1.5%, 0) scale(0.98); }
   }
-  /* flat canvas: no grain / grid overlay */
+  /* Fine grain + technical grid for a premium finish */
   body::after {
-    content: none;
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+      linear-gradient(oklch(0.85 0.22 128 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.85 0.22 128 / 0.045) 1px, transparent 1px);
+    background-size:
+      160px 160px,
+      96px 96px,
+      96px 96px;
+    opacity: 0.4;
   }
   /* hero candle chart motion */
   .candle-in {
@@ -2665,11 +2698,11 @@
    the utilities defined above without touching the original design markup.
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --background: oklch(0.245 0.05 133);
+  --background: oklch(0.13 0.02 133);
   --foreground: oklch(0.975 0.002 250);
-  --card: oklch(0.29 0.045 133);
+  --card: oklch(0.215 0.022 133);
   --card-foreground: oklch(0.975 0.002 250);
-  --popover: oklch(0.27 0.045 133);
+  --popover: oklch(0.2 0.022 133);
   --popover-foreground: oklch(0.975 0.002 250);
   --primary: oklch(0.93 0.22 124);
   --primary-foreground: oklch(0.17 0.02 128);
