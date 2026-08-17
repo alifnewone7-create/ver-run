@@ -111,7 +111,15 @@ const BTN_SECONDARY =
 /* ── section label ── */
 function Label({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-display text-xs uppercase tracking-[0.24em] text-zinc-500">{children}</span>
+    <span
+      className="font-display inline-flex items-center rounded-xl border border-[#CCFF00]/25 px-5 py-2.5 text-xs uppercase tracking-[0.24em] text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
+      style={{
+        backgroundImage:
+          'linear-gradient(135deg, rgba(204,255,0,0.18) 0%, rgba(204,255,0,0.06) 45%, rgba(255,255,255,0.02) 100%)',
+      }}
+    >
+      {children}
+    </span>
   )
 }
 
@@ -362,7 +370,7 @@ function Hero() {
 function Features() {
   return (
     <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 lg:py-28">
-      <div className="max-w-2xl">
+      <div className="mx-auto max-w-2xl text-center">
         <Label>Built for serious traders</Label>
         <h2 className="font-display mt-4 text-balance text-3xl font-medium tracking-tight text-white md:text-4xl">
           Everything you need to trade with{' '}
@@ -396,7 +404,7 @@ function Features() {
 function HowItWorks() {
   return (
     <section id="how-it-works" className="mx-auto max-w-6xl scroll-mt-24 px-4 pb-16 sm:px-6 lg:pb-28">
-      <div className="max-w-2xl">
+      <div className="mx-auto max-w-2xl text-center">
         <Label>How it works</Label>
         <h2 className="font-display mt-4 text-balance text-3xl font-medium tracking-tight text-white md:text-4xl">
           From zero to first signal in <span className="text-[#CCFF00]">minutes</span>
