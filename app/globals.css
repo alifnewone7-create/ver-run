@@ -3143,3 +3143,53 @@ a.btn-luxe-outline {
     animation: none;
   }
 }
+
+/* trade vision hero chart */
+.tv-draw {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: tv-draw 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes tv-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.tv-fade-in {
+  opacity: 0;
+  animation: tv-fade-in 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+}
+@keyframes tv-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+.tv-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tv-ping 2.2s ease-out infinite;
+}
+@keyframes tv-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .tv-fade-in {
+    animation: none;
+    opacity: 1;
+  }
+  .tv-ping {
+    animation: none;
+  }
+}

@@ -147,95 +147,166 @@ function SectionHead({
   )
 }
 
-/* ── candles ── */
-const CANDLES: [number, number, number, number][] = [
-  [38, 48, 54, 33], [46, 42, 51, 38], [43, 51, 57, 40], [50, 39, 53, 34],
-  [40, 45, 50, 36], [45, 62, 68, 43], [61, 57, 66, 52], [56, 47, 60, 44],
-  [48, 55, 61, 45], [54, 44, 58, 40], [45, 39, 49, 34], [40, 47, 52, 37],
-  [46, 41, 50, 37], [42, 52, 58, 39], [51, 46, 55, 42], [47, 56, 62, 44],
-  [55, 61, 67, 51], [60, 72, 78, 57], [71, 66, 76, 62], [67, 74, 80, 64],
+/* ── trade vision (hero chart) ── */
+const TREND: [number, number][] = [
+  [0, 212], [70, 196], [140, 204], [215, 168], [290, 180], [365, 132],
+  [440, 148], [515, 106], [590, 122], [665, 84], [740, 96], [815, 56], [880, 42],
 ]
 
-function CandleChart() {
+function smoothPath(pts: [number, number][]) {
+  let d = `M${pts[0][0]},${pts[0][1]}`
+  for (let i = 1; i < pts.length - 1; i++) {
+    const mx = (pts[i][0] + pts[i + 1][0]) / 2
+    const my = (pts[i][1] + pts[i + 1][1]) / 2
+    d += ` Q${pts[i][0]},${pts[i][1]} ${mx},${my}`
+  }
+  const last = pts[pts.length - 1]
+  d += ` L${last[0]},${last[1]}`
+  return d
+}
+
+function TradeVision() {
   const W = 900
-  const H = 300
-  const padX = 34
-  const step = (W - padX * 2) / (CANDLES.length - 1)
-  const y = (v: number) => H - 34 - ((v - 28) / 56) * (H - 104)
-  const x = (i: number) => padX + i * step
-  const path = CANDLES.map((c, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y((c[0] + c[1]) / 2).toFixed(1)}`).join(' ')
-  const signalIdx = 5
+  const H = 260
+  const line = smoothPath(TREND)
+  const area = `${line} L${W},${H} L0,${H} Z`
+  const tip = TREND[TREND.length - 1]
+  const signalAt = TREND[7]
 
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}
       className="h-full w-full"
       role="img"
-      aria-label="AI detected candlestick pattern with a buy signal"
+      aria-label="Vertex AI live trend analysis with a buy signal"
     >
       <defs>
-        <linearGradient id="vx-up" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#DBFF4D" />
-          <stop offset="100%" stopColor="#9ACC00" />
+        <linearGradient id="tv-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="rgba(204,255,0,0.28)" />
+          <stop offset="55%" stopColor="rgba(204,255,0,0.07)" />
+          <stop offset="100%" stopColor="rgba(204,255,0,0)" />
         </linearGradient>
-        <linearGradient id="vx-dn" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#5A6B63" />
-          <stop offset="100%" stopColor="#39433D" />
+        <linearGradient id="tv-line" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#8FBF00" />
+          <stop offset="70%" stopColor="#CCFF00" />
+          <stop offset="100%" stopColor="#EDFFB0" />
         </linearGradient>
       </defs>
 
+      {/* horizontal grid */}
+      {[52, 104, 156, 208].map((gy) => (
+        <line key={gy} x1="0" x2={W} y1={gy} y2={gy} stroke="rgba(255,255,255,0.05)" strokeDasharray="3 9" />
+      ))}
+
+      {/* area fill */}
+      <path d={area} fill="url(#tv-fill)" className="tv-fade-in" />
+
+      {/* main glowing line */}
       <path
-        d={path}
+        d={line}
         fill="none"
-        stroke="rgba(204,255,0,0.4)"
-        strokeWidth="1.6"
+        stroke="url(#tv-line)"
+        strokeWidth="2.6"
         strokeLinecap="round"
-        strokeDasharray="6 8"
-        className="spine-flow"
-        vectorEffect="non-scaling-stroke"
+        className="tv-draw"
+        style={{ filter: 'drop-shadow(0 0 6px rgba(204,255,0,0.45))' }}
       />
 
-      {CANDLES.map((c, i) => {
-        const [o, cl, h, l] = c
-        const up = cl >= o
-        const bodyTop = y(Math.max(o, cl))
-        const bodyH = Math.max(6, y(Math.min(o, cl)) - bodyTop)
-        return (
-          <g key={i} className="candle-in" style={{ animationDelay: `${i * 45}ms` }}>
-            <line
-              x1={x(i)}
-              x2={x(i)}
-              y1={y(h)}
-              y2={y(l)}
-              stroke={up ? '#B8E600' : '#4C5952'}
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-            />
-            <rect x={x(i) - 6} y={bodyTop} width="12" height={bodyH} rx="2" fill={up ? 'url(#vx-up)' : 'url(#vx-dn)'} />
-          </g>
-        )
-      })}
+      {/* entry marker on signal point */}
+      <g className="tv-fade-in" style={{ animationDelay: '1.4s' }}>
+        <line
+          x1={signalAt[0]}
+          x2={signalAt[0]}
+          y1={signalAt[1]}
+          y2={H - 6}
+          stroke="rgba(204,255,0,0.3)"
+          strokeDasharray="4 6"
+        />
+        <circle cx={signalAt[0]} cy={signalAt[1]} r="5" fill="#0A0C08" stroke={LIME} strokeWidth="2" />
+      </g>
 
-      <g transform={`translate(${x(signalIdx)}, ${y(CANDLES[signalIdx][2]) - 26})`}>
+      {/* BUY chip */}
+      <g transform={`translate(${signalAt[0]}, ${signalAt[1] - 34})`}>
         <g className="buy-pop">
-          <rect
-            x="-32"
-            y="-13"
-            width="64"
-            height="26"
-            rx="13"
-            fill="rgba(4,6,4,0.9)"
-            stroke="rgba(204,255,0,0.55)"
-            vectorEffect="non-scaling-stroke"
-          />
-          <circle cx="-20" cy="0" r="3.4" fill={LIME} />
-          <text x="-12" y="4.5" fill="#F4FFDA" fontSize="11" fontWeight="700" letterSpacing="0.8">
-            BUY
+          <rect x="-44" y="-15" width="88" height="30" rx="15" fill="rgba(4,6,4,0.92)" stroke="rgba(204,255,0,0.55)" />
+          <circle cx="-28" cy="0" r="3.4" fill={LIME} />
+          <text x="-18" y="4.5" fill="#F4FFDA" fontSize="12" fontWeight="700" letterSpacing="0.8">
+            BUY 96%
           </text>
         </g>
       </g>
+
+      {/* live tip pulse */}
+      <g className="tv-fade-in" style={{ animationDelay: '2s' }}>
+        <circle cx={tip[0]} cy={tip[1]} r="4.5" fill={LIME} />
+        <circle cx={tip[0]} cy={tip[1]} r="4.5" fill="none" stroke={LIME} className="tv-ping" />
+      </g>
     </svg>
+  )
+}
+
+const TICKER_STATS = [
+  { pair: 'EUR/USD', value: '1.0842', change: '+0.32%' },
+  { pair: 'BTC/USDT', value: '67,412', change: '+1.08%' },
+  { pair: 'GBP/JPY', value: '191.26', change: '+0.54%' },
+]
+
+function HeroTerminal() {
+  return (
+    <div className="hero-float overflow-hidden rounded-2xl border border-white/[0.08] bg-[#050705]/90 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl">
+      {/* terminal chrome bar */}
+      <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3 sm:px-5">
+        <div className="flex items-center gap-3">
+          <span className="flex gap-1.5" aria-hidden="true">
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#CCFF00]/60" />
+          </span>
+          <span className="font-display hidden text-[0.65rem] uppercase tracking-[0.22em] text-zinc-500 sm:block">
+            Vertex Terminal
+          </span>
+        </div>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="font-display rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-1 text-[0.6rem] uppercase tracking-[0.16em] text-zinc-400 sm:text-[0.65rem]">
+            EUR/USD · 1M
+          </span>
+          <span className="font-display inline-flex items-center gap-1.5 rounded-md border border-[#CCFF00]/30 bg-[#CCFF00]/10 px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[#CCFF00] sm:text-[0.65rem]">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#CCFF00]/60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#CCFF00]" />
+            </span>
+            Live
+          </span>
+        </div>
+      </div>
+
+      {/* chart */}
+      <div className="relative p-3 sm:p-5" data-testid="hero-candle-chart">
+        <div className="aspect-[900/260] w-full">
+          <TradeVision />
+        </div>
+      </div>
+
+      {/* ticker stats */}
+      <div className="grid grid-cols-3 divide-x divide-white/[0.06] border-t border-white/[0.06]">
+        {TICKER_STATS.map((t) => (
+          <div key={t.pair} className="px-3 py-3 text-center sm:px-5">
+            <p className="font-display text-[0.6rem] uppercase tracking-[0.16em] text-zinc-500 sm:text-[0.65rem]">
+              {t.pair}
+            </p>
+            <p className="font-display mt-1 text-xs font-medium text-zinc-100 sm:text-sm">
+              {t.value}{' '}
+              <span className="text-[0.65rem] font-semibold text-[#CCFF00] sm:text-xs">{t.change}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <p className="font-display flex items-center justify-center gap-2 border-t border-white/[0.06] py-3.5 text-xs text-zinc-500 sm:text-sm">
+        <CircuitBoard className="h-3.5 w-3.5 text-[#CCFF00]" />
+        Powered by Vertex AI real-time algorithm
+      </p>
+    </div>
   )
 }
 
@@ -384,21 +455,7 @@ function Hero() {
         style={{ animationDelay: '320ms' }}
         data-testid="hero-neural-core-card"
       >
-        <div className="hero-float overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:p-5">
-          <div
-            className="rounded-xl border border-white/[0.06] p-2 sm:p-4"
-            style={{ background: 'linear-gradient(180deg, rgba(204,255,0,0.03), rgba(2,3,2,0.6))' }}
-            data-testid="hero-candle-chart"
-          >
-            <div className="aspect-[900/300] w-full">
-              <CandleChart />
-            </div>
-          </div>
-          <p className="font-display mt-4 flex items-center justify-center gap-2 pb-1 text-xs text-zinc-500 sm:text-sm">
-            <CircuitBoard className="h-3.5 w-3.5 text-[#CCFF00]" />
-            Powered by Vertex AI real-time algorithm
-          </p>
-        </div>
+        <HeroTerminal />
 
         <div
           aria-hidden="true"
