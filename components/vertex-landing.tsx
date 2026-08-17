@@ -356,11 +356,20 @@ function Hero() {
               <CandleChart />
             </div>
           </div>
-          <p className="font-display mt-4 flex items-center justify-center gap-2 border-t border-white/[0.08] pt-4 pb-1 text-xs text-zinc-500 sm:text-sm">
+          <p className="font-display mt-4 flex items-center justify-center gap-2 pb-1 text-xs text-zinc-500 sm:text-sm">
             <CircuitBoard className="h-3.5 w-3.5 text-[#CCFF00]" />
             Powered by Vertex AI real-time algorithm
           </p>
         </div>
+
+        <div
+          aria-hidden="true"
+          className="mt-14 h-px w-full lg:mt-20"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent, rgba(204,255,0,0.35) 50%, transparent)',
+          }}
+        />
       </div>
     </section>
   )
