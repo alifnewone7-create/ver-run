@@ -710,7 +710,7 @@ function Pricing() {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="pricing-quotex-button"
-              className="font-display inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#8E1B3A] via-[#5C1030] to-[#1A0B10] px-8 text-sm font-medium text-rose-100 shadow-[0_4px_20px_rgba(142,27,58,0.35),inset_0_1px_0_rgba(255,255,255,0.12)] transition-transform duration-200 hover:scale-[1.02] hover:shadow-[0_6px_28px_rgba(142,27,58,0.5),inset_0_1px_0_rgba(255,255,255,0.15)] sm:text-base"
+              className="btn-clay-plum font-display inline-flex h-12 w-full items-center justify-center gap-2 px-8 text-sm sm:text-base"
             >
               <UserPlus className="h-4 w-4" />
               Create Quotex Account

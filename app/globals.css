@@ -3029,6 +3029,33 @@ a.btn-luxe-outline {
     0 8px 14px -12px oklch(0 0 0 / 0.7);
 }
 
+.btn-clay-plum {
+  position: relative;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(180deg, oklch(0.48 0.17 12) 0%, oklch(0.3 0.11 355) 55%, oklch(0.2 0.05 350) 100%);
+  color: oklch(0.95 0.02 12);
+  font-weight: 600;
+  box-shadow:
+    inset 0 1.5px 0 oklch(1 0 0 / 0.14),
+    inset 0 -3px 0 oklch(0.15 0.05 350),
+    0 5px 0 oklch(0.12 0.04 350 / 0.9),
+    0 16px 26px -16px oklch(0 0 0 / 0.85);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
+}
+.btn-clay-plum:hover {
+  filter: brightness(1.12);
+}
+.btn-clay-plum:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 1.5px 0 oklch(1 0 0 / 0.1),
+    inset 0 -2px 0 oklch(0.15 0.05 350),
+    0 2px 0 oklch(0.12 0.04 350 / 0.9),
+    0 8px 14px -12px oklch(0 0 0 / 0.7);
+}
+
 /* puffy raised clay panel — with soft glass tint so graded background bleeds through */
 .clay-card {
   background:
