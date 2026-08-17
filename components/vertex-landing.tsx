@@ -23,8 +23,6 @@ import {
   ScanSearch,
   Rocket,
   ArrowRight,
-  Sparkles,
-  Zap,
   Radar,
 } from 'lucide-react'
 
@@ -668,17 +666,8 @@ function Pricing() {
           data-testid="pricing-free-card"
         >
           <div className="flex items-start justify-between gap-3">
-            <div>
-              <span className="font-display inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-zinc-400">
-                <Sparkles className="h-3 w-3 text-[#CCFF00]" />
-                Partner route
-              </span>
-              <h3 className="font-display mt-4 text-2xl tracking-tight text-white">Free Access</h3>
-            </div>
-            <div className="text-right">
-              <div className="font-display text-4xl font-semibold tracking-tight text-white">$0</div>
-              <div className="font-display mt-1 text-xs text-zinc-500">via partner broker</div>
-            </div>
+            <h3 className="font-display text-2xl tracking-tight text-white">Free Access</h3>
+            <div className="font-display text-4xl font-semibold tracking-tight text-white">$0</div>
           </div>
           <p className="font-display mt-3 text-sm font-light text-zinc-400">
             Follow these 3 simple steps to unlock Vertex AI for free.
@@ -751,14 +740,8 @@ function Pricing() {
             style={{ background: 'radial-gradient(ellipse at center, rgba(204,255,0,0.2), transparent 70%)' }}
           />
 
-          <div className="relative flex items-start justify-between gap-3">
-            <div>
-              <span className="font-display inline-flex items-center gap-1.5 rounded-full bg-[#CCFF00] px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-black shadow-[0_2px_12px_rgba(204,255,0,0.35)]">
-                <Zap className="h-3 w-3" />
-                Direct access
-              </span>
-              <h3 className="font-display mt-4 text-2xl tracking-tight text-white">Buy License</h3>
-            </div>
+          <div className="relative">
+            <h3 className="font-display text-2xl tracking-tight text-white">Buy License</h3>
           </div>
 
           <div className="relative mt-6 flex items-end gap-2">
