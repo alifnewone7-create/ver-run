@@ -931,9 +931,9 @@ export function VertexLanding() {
       <Navbar />
       <main>
         <Hero />
-        <Features />
-        <HowItWorks />
         <Pricing />
+        <HowItWorks />
+        <Features />
         <CtaBand />
       </main>
       <Footer />
