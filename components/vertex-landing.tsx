@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import {
   BrainCircuit,
@@ -901,6 +902,22 @@ function Footer() {
 }
 
 export function VertexLanding() {
+  const router = useRouter()
+
+  useEffect(() => {
+    const warm = () => {
+      router.prefetch('/login')
+      router.prefetch('/registration')
+      fetch('/login').catch(() => {})
+      fetch('/registration').catch(() => {})
+    }
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(warm, { timeout: 2000 })
+    } else {
+      setTimeout(warm, 1200)
+    }
+  }, [router])
+
   return (
     <div
       id="top"
