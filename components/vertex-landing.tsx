@@ -67,13 +67,6 @@ const FEATURES = [
   },
 ]
 
-const STATS = [
-  { value: '98.6%', label: 'Signal accuracy' },
-  { value: '120+', label: 'Signals per day' },
-  { value: '40+', label: 'Markets scanned' },
-  { value: '24/7', label: 'Live telemetry' },
-]
-
 const STEPS = [
   {
     icon: PlugZap,
@@ -365,24 +358,6 @@ function Hero() {
   )
 }
 
-/* ── stats ── */
-function Stats() {
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:py-16" data-testid="stats-row">
-      <div className="grid grid-cols-2 gap-y-10 border-y border-white/[0.07] py-10 md:grid-cols-4">
-        {STATS.map((s) => (
-          <div key={s.label} className="px-2 text-center md:px-4">
-            <p className="font-display text-3xl font-semibold tracking-tight text-[#CCFF00] sm:text-4xl lg:text-5xl">
-              {s.value}
-            </p>
-            <p className="font-display mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">{s.label}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 /* ── features ── */
 function Features() {
   return (
@@ -668,7 +643,6 @@ export function VertexLanding() {
       <Navbar />
       <main>
         <Hero />
-        <Stats />
         <Features />
         <HowItWorks />
         <Pricing />
