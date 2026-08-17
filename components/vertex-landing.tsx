@@ -300,9 +300,6 @@ function HeroTerminal() {
           </span>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
-          <span className="font-display rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-1 text-[0.6rem] uppercase tracking-[0.16em] text-zinc-400 sm:text-[0.65rem]">
-            EUR/USD · 1M
-          </span>
           <span className="font-display inline-flex items-center gap-1.5 rounded-md border border-[#CCFF00]/30 bg-[#CCFF00]/10 px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[#CCFF00] sm:text-[0.65rem]">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#CCFF00]/60" />
