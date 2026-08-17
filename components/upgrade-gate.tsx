@@ -154,7 +154,7 @@ export function UpgradeGateProvider({ children }: { children: ReactNode }) {
                   nativeButton={false}
                   render={
                     <a
-                      href="https://t.me/Ayan_sx"
+                      href="https://t.me/Vertex_Ai_Support"
                       target="_blank"
                       rel="noopener noreferrer"
                     />
@@ -238,7 +238,7 @@ export function UpgradeGateProvider({ children }: { children: ReactNode }) {
                     nativeButton={false}
                     render={
                       <a
-                        href="https://t.me/Ayan_sx"
+                        href="https://t.me/Vertex_Ai_Support"
                         target="_blank"
                         rel="noopener noreferrer"
                       />
@@ -337,7 +337,7 @@ export function UpgradeGateProvider({ children }: { children: ReactNode }) {
                       nativeButton={false}
                       render={
                         <a
-                          href="https://t.me/Ayan_sx"
+                          href="https://t.me/Vertex_Ai_Support"
                           target="_blank"
                           rel="noopener noreferrer"
                         />
@@ -389,7 +389,7 @@ export function UpgradeGateProvider({ children }: { children: ReactNode }) {
                     nativeButton={false}
                     render={
                       <a
-                        href="https://t.me/Ayan_sx"
+                        href="https://t.me/Vertex_Ai_Support"
                         target="_blank"
                         rel="noopener noreferrer"
                       />

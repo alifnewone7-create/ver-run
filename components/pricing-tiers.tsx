@@ -94,7 +94,7 @@ export function PricingTiers() {
                 variant="outline"
                 render={
                   <a
-                    href="https://t.me/Ayan_sx"
+                    href="https://t.me/Vertex_Ai_Support"
                     target="_blank"
                     rel="noopener noreferrer"
                   />
@@ -142,7 +142,7 @@ export function PricingTiers() {
             <Button
               render={
                 <a
-                  href="https://t.me/Ayan_sx"
+                  href="https://t.me/Vertex_Ai_Support"
                   target="_blank"
                   rel="noopener noreferrer"
                 />

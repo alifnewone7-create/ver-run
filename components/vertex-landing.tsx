@@ -32,7 +32,7 @@ const NAV_LINKS = [
   { label: 'Features', href: '#features' },
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Pricing', href: '#pricing' },
-  { label: 'Support', href: 'https://t.me/Ayan_sx', external: true },
+  { label: 'Support', href: 'https://t.me/Vertex_Ai_Support', external: true },
 ]
 
 const FEATURES = [
@@ -98,7 +98,7 @@ const FREE_STEPS = [
 const LICENSE_PERKS = [
   'Skip broker registration entirely',
   'Direct, unrestricted access',
-  '1-month full license, instant activation',
+  'Lifetime full license, instant activation',
   'Priority support included',
 ]
 
@@ -715,7 +715,7 @@ function Pricing() {
               Create Quotex Account
             </a>
             <a
-              href="https://t.me/Ayan_sx"
+              href="https://t.me/Vertex_Ai_Support"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="pricing-contact-admin-button"
@@ -772,7 +772,7 @@ function Pricing() {
           </ul>
 
           <a
-            href="https://t.me/Ayan_sx"
+            href="https://t.me/Vertex_Ai_Support"
             target="_blank"
             rel="noopener noreferrer"
             data-testid="pricing-purchase-button"
@@ -868,7 +868,7 @@ function Footer() {
                 Privacy Policy
               </Link>
               <a
-                href="https://t.me/Ayan_sx"
+                href="https://t.me/Vertex_Ai_Support"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-support-link"

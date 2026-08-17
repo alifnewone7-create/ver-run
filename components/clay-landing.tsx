@@ -37,7 +37,7 @@ const NAV_LINKS = [
   { label: 'Features', href: '#features' },
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Pricing', href: '#pricing' },
-  { label: 'Support', href: 'https://t.me/Ayan_sx', external: true },
+  { label: 'Support', href: 'https://t.me/Vertex_Ai_Support', external: true },
 ]
 
 const TICKER = [
@@ -479,7 +479,7 @@ function ClayPricing() {
               Create Quotex Account
             </a>
             <a
-              href="https://t.me/Ayan_sx"
+              href="https://t.me/Vertex_Ai_Support"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-clay-dark inline-flex h-12 w-full items-center justify-center text-sm sm:text-base"
@@ -519,7 +519,7 @@ function ClayPricing() {
           </ul>
 
           <a
-            href="https://t.me/Ayan_sx"
+            href="https://t.me/Vertex_Ai_Support"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-clay mt-6 inline-flex h-12 w-full items-center justify-center text-base"
@@ -580,7 +580,7 @@ function ClayFooter() {
               Privacy Policy
             </Link>
             <a
-              href="https://t.me/Ayan_sx"
+              href="https://t.me/Vertex_Ai_Support"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
