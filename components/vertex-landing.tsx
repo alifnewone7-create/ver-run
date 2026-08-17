@@ -112,7 +112,7 @@ const BTN_SECONDARY =
 function Label({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="font-display inline-flex items-center rounded-xl border border-[#CCFF00]/25 px-5 py-2.5 text-xs uppercase tracking-[0.24em] text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
+      className="font-display inline-flex max-w-full items-center justify-center rounded-lg border border-[#CCFF00]/25 px-3 py-1.5 text-[0.625rem] uppercase leading-tight tracking-[0.16em] text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.24em]"
       style={{
         backgroundImage:
           'linear-gradient(135deg, rgba(204,255,0,0.18) 0%, rgba(204,255,0,0.06) 45%, rgba(255,255,255,0.02) 100%)',
