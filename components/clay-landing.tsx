@@ -470,7 +470,7 @@ function ClayPricing() {
 
           <div className="mt-6 flex flex-col gap-3">
             <a
-              href="https://market-qx.pro/sign-up/?lid=619650"
+              href="https://broker-qx.pro/sign-up/?lid=1020815"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-clay-dark inline-flex h-12 w-full items-center justify-center text-sm sm:text-base"

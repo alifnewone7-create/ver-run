@@ -322,7 +322,7 @@ export function UpgradeGateProvider({ children }: { children: ReactNode }) {
                       nativeButton={false}
                       render={
                         <a
-                          href="https://market-qx.pro/sign-up/?lid=619650"
+                          href="https://broker-qx.pro/sign-up/?lid=1020815"
                           target="_blank"
                           rel="noopener noreferrer"
                         />

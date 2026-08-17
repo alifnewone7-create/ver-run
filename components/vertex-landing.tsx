@@ -705,7 +705,7 @@ function Pricing() {
 
           <div className="mt-9 flex flex-col gap-3">
             <a
-              href="https://market-qx.pro/sign-up/?lid=619650"
+              href="https://broker-qx.pro/sign-up/?lid=1020815"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="pricing-quotex-button"
