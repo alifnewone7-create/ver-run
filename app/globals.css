@@ -3123,3 +3123,23 @@ a.btn-luxe-outline {
     animation: none !important;
   }
 }
+
+/* gentle float for the hero chart card */
+.hero-float {
+  animation: hero-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-float {
+    animation: none;
+  }
+}

@@ -23,6 +23,8 @@ import {
   ScanSearch,
   Rocket,
   ArrowRight,
+  Sparkles,
+  Zap,
 } from 'lucide-react'
 
 const LIME = '#CCFF00'
@@ -101,8 +103,6 @@ const LICENSE_PERKS = [
   'Priority support included',
 ]
 
-const GLASS =
-  'rounded-2xl border border-white/[0.08] bg-white/[0.02] shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-colors duration-300 hover:border-[#CCFF00]/40'
 const BTN_PRIMARY =
   'btn-clay font-display inline-flex h-12 items-center justify-center gap-2 px-8 text-sm sm:text-base'
 const BTN_SECONDARY =
@@ -112,7 +112,7 @@ const BTN_SECONDARY =
 function Label({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="font-display inline-flex max-w-full items-center justify-center rounded-lg border border-[#CCFF00]/25 px-3 py-1.5 text-[0.625rem] uppercase leading-tight tracking-[0.16em] text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.24em]"
+      className="font-display inline-flex max-w-full items-center justify-center gap-2 rounded-lg border border-[#CCFF00]/25 px-3 py-1.5 text-[0.625rem] uppercase leading-tight tracking-[0.16em] text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.24em]"
       style={{
         backgroundImage:
           'linear-gradient(135deg, rgba(204,255,0,0.18) 0%, rgba(204,255,0,0.06) 45%, rgba(255,255,255,0.02) 100%)',
@@ -120,6 +120,29 @@ function Label({ children }: { children: React.ReactNode }) {
     >
       {children}
     </span>
+  )
+}
+
+/* ── section heading block ── */
+function SectionHead({
+  label,
+  title,
+  sub,
+}: {
+  label: string
+  title: React.ReactNode
+  sub?: string
+}) {
+  return (
+    <div className="mx-auto max-w-2xl text-center">
+      <Label>{label}</Label>
+      <h2 className="font-display mt-5 text-balance text-3xl font-medium tracking-tight text-white md:text-4xl">
+        {title}
+      </h2>
+      {sub && (
+        <p className="font-display mt-4 text-pretty text-base font-light text-zinc-400">{sub}</p>
+      )}
+    </div>
   )
 }
 
@@ -311,11 +334,11 @@ function Hero() {
 
       <div className="relative mx-auto max-w-4xl text-center">
         <h1
-          className="font-display reveal-up text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-7xl"
+          className="font-display reveal-up text-balance text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-7xl"
           data-testid="hero-heading"
         >
-          Trade with Intelligence.{' '}
-          <span className="text-[#CCFF00]">Win with Vertex AI.</span>
+          <span className="font-light text-white">Trade with Intelligence.</span>{' '}
+          <span className="font-semibold text-[#CCFF00]">Win with Vertex AI.</span>
         </h1>
 
         <p
@@ -346,7 +369,7 @@ function Hero() {
         style={{ animationDelay: '320ms' }}
         data-testid="hero-neural-core-card"
       >
-        <div className={`${GLASS} overflow-hidden p-3 sm:p-5`}>
+        <div className="hero-float overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:p-5">
           <div
             className="rounded-xl border border-white/[0.06] p-2 sm:p-4"
             style={{ background: 'linear-gradient(180deg, rgba(204,255,0,0.03), rgba(2,3,2,0.6))' }}
@@ -375,31 +398,16 @@ function Hero() {
   )
 }
 
-/* ── features ── */
-function Features() {
-  return (
-    <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-12 sm:px-6 lg:py-16">
-      <div className="mx-auto max-w-2xl text-center">
-        <Label>Built for serious traders</Label>
-        <h2 className="font-display mt-4 text-balance text-3xl font-medium tracking-tight text-white md:text-4xl">
-          Everything you need to trade with{' '}
-          <span className="text-[#CCFF00]">machine precision</span>
-        </h2>
-        <p className="font-display mt-4 text-pretty text-base font-light text-zinc-400">
-          A complete algorithmic toolkit engineered for accuracy, speed and consistency.
-        </p>
-      </div>
-
-      <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {FEATURES.map((f, i) => (
-          <FeatureCard key={f.title} f={f} wide={i === 0 || i === 3 || i === 4} />
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean }) {
+/* ── feature card ── */
+function FeatureCard({
+  f,
+  className = '',
+  horizontal = false,
+}: {
+  f: (typeof FEATURES)[number]
+  className?: string
+  horizontal?: boolean
+}) {
   const ref = useRef<HTMLDivElement>(null)
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -415,11 +423,8 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
       ref={ref}
       onMouseMove={onMove}
       data-testid={`feature-card-${f.title.toLowerCase().replace(/\s+/g, '-')}`}
-      className={`group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#CCFF00]/40 hover:shadow-[0_16px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(204,255,0,0.07)] ${
-        wide ? 'lg:col-span-2' : ''
-      }`}
+      className={`group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#070907]/70 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#CCFF00]/40 hover:shadow-[0_16px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(204,255,0,0.07)] ${className}`}
     >
-      {/* cursor spotlight */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -428,7 +433,6 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
             'radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(204,255,0,0.09), transparent 70%)',
         }}
       />
-      {/* top accent line */}
       <span
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-px opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100"
@@ -436,12 +440,9 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
           background: 'linear-gradient(90deg, transparent, rgba(204,255,0,0.7) 50%, transparent)',
         }}
       />
-      {/* faint circuit rings */}
       <span
         aria-hidden="true"
-        className={`pointer-events-none absolute top-1/2 -translate-y-1/2 ${
-          wide ? '-right-14 lg:block' : '-right-20 lg:hidden'
-        } block`}
+        className="pointer-events-none absolute -right-16 top-1/2 block -translate-y-1/2"
       >
         <span className="block h-52 w-52 rounded-full border border-[#CCFF00]/[0.07]" />
         <span className="absolute inset-6 rounded-full border border-[#CCFF00]/[0.1]" />
@@ -449,10 +450,10 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
         <span className="absolute inset-[76px] rounded-full bg-[#CCFF00]/[0.06] blur-[2px]" />
       </span>
 
-      <div className="relative flex h-full flex-col p-7 sm:p-8">
-        <div className="flex items-center gap-4">
+      <div className={`relative flex h-full p-7 sm:p-8 ${horizontal ? 'flex-col gap-5 sm:flex-row sm:items-center sm:gap-8' : 'flex-col'}`}>
+        <div className={`flex items-center gap-4 ${horizontal ? 'sm:shrink-0' : ''}`}>
           <div
-            className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#CCFF00]/30 shadow-[0_0_18px_rgba(204,255,0,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 group-hover:shadow-[0_0_26px_rgba(204,255,0,0.28),inset_0_1px_0_rgba(255,255,255,0.12)]"
+            className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#CCFF00]/30 shadow-[0_0_18px_rgba(204,255,0,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-shadow duration-300 group-hover:shadow-[0_0_26px_rgba(204,255,0,0.28),inset_0_1px_0_rgba(255,255,255,0.12)]"
             style={{
               background:
                 'linear-gradient(135deg, rgba(204,255,0,0.22) 0%, rgba(204,255,0,0.06) 60%, rgba(255,255,255,0.02) 100%)',
@@ -469,7 +470,7 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
           </h3>
         </div>
 
-        <p className={`font-display mt-5 text-sm font-light leading-relaxed text-zinc-400 ${wide ? 'lg:max-w-md' : ''}`}>
+        <p className={`font-display text-sm font-light leading-relaxed text-zinc-400 ${horizontal ? 'sm:mt-0 sm:max-w-xl' : 'mt-5'}`}>
           {f.desc}
         </p>
       </div>
@@ -477,34 +478,83 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
   )
 }
 
-/* ── how it works ── */
+/* ── features (bento) ── */
+function Features() {
+  return (
+    <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-12 sm:px-6 lg:py-16">
+      <SectionHead
+        label="Built for serious traders"
+        title={
+          <>
+            Everything you need to trade with <span className="text-[#CCFF00]">machine precision</span>
+          </>
+        }
+        sub="A complete algorithmic toolkit engineered for accuracy, speed and consistency."
+      />
+
+      <div className="mt-12 grid gap-5 lg:grid-cols-12 lg:gap-6">
+        <FeatureCard f={FEATURES[0]} className="lg:col-span-7" />
+        <FeatureCard f={FEATURES[1]} className="lg:col-span-5" />
+        <FeatureCard f={FEATURES[2]} className="lg:col-span-4" />
+        <FeatureCard f={FEATURES[3]} className="lg:col-span-4" />
+        <FeatureCard f={FEATURES[4]} className="lg:col-span-4" />
+        <FeatureCard f={FEATURES[5]} className="lg:col-span-12" horizontal />
+      </div>
+    </section>
+  )
+}
+
+/* ── how it works (timeline) ── */
 function HowItWorks() {
   return (
-    <section id="how-it-works" className="mx-auto max-w-6xl scroll-mt-24 px-4 pb-16 sm:px-6 lg:pb-28">
-      <div className="mx-auto max-w-2xl text-center">
-        <Label>How it works</Label>
-        <h2 className="font-display mt-4 text-balance text-3xl font-medium tracking-tight text-white md:text-4xl">
-          From zero to first signal in <span className="text-[#CCFF00]">minutes</span>
-        </h2>
-      </div>
+    <section id="how-it-works" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-12 sm:px-6 lg:py-16">
+      <SectionHead
+        label="How it works"
+        title={
+          <>
+            From zero to first signal in <span className="text-[#CCFF00]">minutes</span>
+          </>
+        }
+      />
 
-      <div className="mt-12 grid gap-5 md:grid-cols-3 lg:gap-6">
-        {STEPS.map((s) => (
-          <div
-            key={s.step}
-            data-testid={`step-card-${s.step}`}
-            className={`${GLASS} relative overflow-hidden p-7 sm:p-8`}
-          >
-            <span className="font-display pointer-events-none absolute -top-4 right-3 select-none text-7xl font-semibold text-white/[0.04] sm:text-8xl">
-              {s.step}
-            </span>
-            <div className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
-              <s.icon className="h-5 w-5 text-[#CCFF00]" />
+      <div className="relative mt-14">
+        {/* connecting line — desktop horizontal */}
+        <div
+          aria-hidden="true"
+          className="absolute left-[16.66%] right-[16.66%] top-7 hidden h-px md:block"
+          style={{
+            background:
+              'linear-gradient(90deg, rgba(204,255,0,0.5), rgba(204,255,0,0.15) 50%, rgba(204,255,0,0.5))',
+          }}
+        />
+        {/* connecting line — mobile vertical */}
+        <div
+          aria-hidden="true"
+          className="absolute bottom-10 left-7 top-10 w-px md:hidden"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(204,255,0,0.5), rgba(204,255,0,0.12) 50%, rgba(204,255,0,0.5))',
+          }}
+        />
+
+        <div className="grid gap-10 md:grid-cols-3 md:gap-6">
+          {STEPS.map((s) => (
+            <div key={s.step} data-testid={`step-card-${s.step}`} className="relative flex gap-5 md:flex-col md:items-center md:text-center">
+              <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#CCFF00]/40 bg-[#0A0C08] shadow-[0_0_24px_rgba(204,255,0,0.15)]">
+                <s.icon className="h-5 w-5 text-[#CCFF00]" />
+                <span className="font-display absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-[#CCFF00] text-[0.6rem] font-bold text-black shadow-[0_2px_8px_rgba(204,255,0,0.4)]">
+                  {s.step.slice(1)}
+                </span>
+              </div>
+              <div className="md:mt-5">
+                <h3 className="font-display text-lg tracking-tight text-zinc-100 sm:text-xl">{s.title}</h3>
+                <p className="font-display mt-2 max-w-sm text-sm font-light leading-relaxed text-zinc-400 md:mx-auto">
+                  {s.desc}
+                </p>
+              </div>
             </div>
-            <h3 className="font-display relative mt-6 text-xl tracking-tight text-zinc-100">{s.title}</h3>
-            <p className="font-display relative mt-3 text-sm font-light leading-relaxed text-zinc-400">{s.desc}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -513,48 +563,71 @@ function HowItWorks() {
 /* ── pricing ── */
 function Pricing() {
   return (
-    <section id="pricing" className="mx-auto max-w-6xl scroll-mt-24 px-4 pb-16 sm:px-6 lg:pb-28">
-      <div className="mx-auto max-w-2xl text-center">
-        <Label>Choose your access</Label>
-        <h2 className="font-display mt-4 text-balance text-3xl font-medium tracking-tight text-white md:text-4xl">
-          Two ways to start with <span className="text-[#CCFF00]">Vertex AI</span>
-        </h2>
-        <p className="font-display mt-4 text-pretty text-base font-light text-zinc-400">
-          Get free access through our partner broker, or buy a direct license and skip the setup.
-        </p>
-      </div>
+    <section id="pricing" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-12 sm:px-6 lg:py-16">
+      <SectionHead
+        label="Choose your access"
+        title={
+          <>
+            Two ways to start with <span className="text-[#CCFF00]">Vertex AI</span>
+          </>
+        }
+        sub="Get free access through our partner broker, or buy a direct license and skip the setup."
+      />
 
-      <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2 lg:gap-8">
-        {/* free */}
-        <div className={`${GLASS} flex flex-col p-7 sm:p-8`} data-testid="pricing-free-card">
-          <div className="flex items-center justify-between gap-3">
-            <h3 className="font-display text-xl tracking-tight text-white sm:text-2xl">Free Access</h3>
-            <span className="font-display rounded-full border border-white/10 px-3.5 py-1.5 text-xs text-zinc-300">
-              $0 / partner
-            </span>
+      <div className="mx-auto mt-14 grid max-w-5xl gap-6 lg:grid-cols-2 lg:gap-8">
+        {/* ── free access ── */}
+        <div
+          className="relative flex flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-[#070907]/80 p-7 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-9"
+          data-testid="pricing-free-card"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <span className="font-display inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-zinc-400">
+                <Sparkles className="h-3 w-3 text-[#CCFF00]" />
+                Partner route
+              </span>
+              <h3 className="font-display mt-4 text-2xl tracking-tight text-white">Free Access</h3>
+            </div>
+            <div className="text-right">
+              <div className="font-display text-4xl font-semibold tracking-tight text-white">$0</div>
+              <div className="font-display mt-1 text-xs text-zinc-500">via partner broker</div>
+            </div>
           </div>
           <p className="font-display mt-3 text-sm font-light text-zinc-400">
             Follow these 3 simple steps to unlock Vertex AI for free.
           </p>
 
-          <ol className="mt-7 flex flex-1 flex-col gap-4">
-            {FREE_STEPS.map((step, i) => (
-              <li key={step.title} className="flex gap-4">
-                <span className="font-display mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-xs font-semibold text-[#CCFF00]">
-                  {i + 1}
-                </span>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <step.icon className="h-4 w-4 text-[#CCFF00]" />
-                    <p className="font-display text-sm font-medium text-zinc-100">{step.title}</p>
+          {/* vertical step timeline */}
+          <div className="relative mt-8 flex-1">
+            <div
+              aria-hidden="true"
+              className="absolute bottom-5 left-[19px] top-5 w-px"
+              style={{
+                background:
+                  'linear-gradient(180deg, rgba(204,255,0,0.45), rgba(204,255,0,0.1))',
+              }}
+            />
+            <ol className="flex flex-col gap-7">
+              {FREE_STEPS.map((step, i) => (
+                <li key={step.title} className="relative flex gap-5">
+                  <span className="font-display relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#CCFF00]/35 bg-[#0A0C08] text-xs font-semibold text-[#CCFF00] shadow-[0_0_16px_rgba(204,255,0,0.12)]">
+                    {i + 1}
+                  </span>
+                  <div className="pt-0.5">
+                    <div className="flex items-center gap-2">
+                      <step.icon className="h-4 w-4 text-[#CCFF00]" />
+                      <p className="font-display text-sm font-medium text-zinc-100">{step.title}</p>
+                    </div>
+                    <p className="font-display mt-1.5 text-sm font-light leading-relaxed text-zinc-500">
+                      {step.desc}
+                    </p>
                   </div>
-                  <p className="font-display mt-1 text-sm font-light text-zinc-500">{step.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+                </li>
+              ))}
+            </ol>
+          </div>
 
-          <div className="mt-8 flex flex-col gap-3">
+          <div className="mt-9 flex flex-col gap-3">
             <a
               href="https://market-qx.pro/sign-up/?lid=619650"
               target="_blank"
@@ -578,38 +651,52 @@ function Pricing() {
           </div>
         </div>
 
-        {/* license */}
+        {/* ── buy license (premium) ── */}
         <div
-          className="relative flex flex-col overflow-hidden rounded-2xl border border-[#CCFF00]/50 bg-white/[0.03] p-7 shadow-[0_8px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:p-8"
+          className="relative flex flex-col overflow-hidden rounded-3xl border border-[#CCFF00]/25 bg-[#090B06]/90 p-7 shadow-[0_12px_48px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:p-9"
           data-testid="pricing-license-card"
         >
+          {/* rotating tracing beam border */}
+          <span aria-hidden="true" className="welcome-luxe-border rounded-3xl" />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-24 right-0 h-56 w-56 rounded-full blur-[70px]"
-            style={{ background: 'radial-gradient(circle, rgba(204,255,0,0.18), transparent 70%)' }}
+            className="pointer-events-none absolute -top-28 left-1/2 h-64 w-[30rem] -translate-x-1/2 rounded-full blur-[80px]"
+            style={{ background: 'radial-gradient(ellipse at center, rgba(204,255,0,0.2), transparent 70%)' }}
           />
-          <div className="relative flex items-center justify-between gap-3">
-            <h3 className="font-display text-xl tracking-tight text-white sm:text-2xl">Buy License</h3>
-            <span className="font-display rounded-full bg-[#CCFF00] px-3.5 py-1.5 text-xs font-semibold text-black">
-              Direct access
+
+          <div className="relative flex items-start justify-between gap-3">
+            <div>
+              <span className="font-display inline-flex items-center gap-1.5 rounded-full bg-[#CCFF00] px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-black shadow-[0_2px_12px_rgba(204,255,0,0.35)]">
+                <Zap className="h-3 w-3" />
+                Direct access
+              </span>
+              <h3 className="font-display mt-4 text-2xl tracking-tight text-white">Buy License</h3>
+            </div>
+          </div>
+
+          <div className="relative mt-6 flex items-end gap-2">
+            <span className="font-display text-6xl font-semibold tracking-tight text-white sm:text-7xl">
+              $99
             </span>
+            <span className="font-display mb-2.5 text-sm text-zinc-500">/ month</span>
           </div>
           <p className="font-display relative mt-3 text-sm font-light text-zinc-400">
             Skip broker registration. Purchase a direct, unrestricted 1-month license immediately.
           </p>
 
-          <div className="relative mt-7 flex items-end gap-2">
-            <span className="font-display text-5xl font-semibold tracking-tight text-white sm:text-6xl">$99</span>
-            <span className="font-display mb-2 text-sm text-zinc-500">/ month</span>
-          </div>
+          <div
+            aria-hidden="true"
+            className="relative mt-7 h-px w-full"
+            style={{ background: 'linear-gradient(90deg, rgba(204,255,0,0.35), transparent)' }}
+          />
 
-          <ul className="relative mt-7 flex flex-1 flex-col gap-3.5">
+          <ul className="relative mt-7 flex flex-1 flex-col gap-4">
             {LICENSE_PERKS.map((perk) => (
               <li key={perk} className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#CCFF00]">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#CCFF00] shadow-[0_0_10px_rgba(204,255,0,0.35)]">
                   <Check className="h-3 w-3 text-black" />
                 </span>
-                <span className="font-display text-sm font-light text-zinc-300">{perk}</span>
+                <span className="font-display text-sm font-light text-zinc-200">{perk}</span>
               </li>
             ))}
           </ul>
@@ -619,11 +706,14 @@ function Pricing() {
             target="_blank"
             rel="noopener noreferrer"
             data-testid="pricing-purchase-button"
-            className={`${BTN_PRIMARY} relative mt-8 w-full`}
+            className={`${BTN_PRIMARY} relative mt-9 w-full`}
           >
             <KeyRound className="h-4 w-4" />
             Purchase License
           </a>
+          <p className="font-display relative mt-4 text-center text-xs text-zinc-600">
+            Instant activation · priority support included
+          </p>
         </div>
       </div>
     </section>
@@ -633,15 +723,16 @@ function Pricing() {
 /* ── cta ── */
 function CtaBand() {
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:pb-28">
-      <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-[#050705] px-6 py-16 text-center sm:px-12 lg:py-24">
+    <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
+      <div className="corner-frame relative overflow-hidden rounded-3xl border border-white/[0.08] bg-[#060806] px-6 py-16 text-center sm:px-12 lg:py-24">
+        <div aria-hidden="true" className="tech-grid absolute inset-0 opacity-60" />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-0 h-72 w-[42rem] -translate-x-1/2 blur-[90px]"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(204,255,0,0.2), transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse at center, rgba(204,255,0,0.22), transparent 70%)' }}
         />
         <h2 className="font-display relative text-balance text-3xl font-medium tracking-tight text-white md:text-4xl lg:text-5xl">
-          Start your trading career with Vertex AI
+          Start your trading career with <span className="text-[#CCFF00]">Vertex AI</span>
         </h2>
         <p className="font-display relative mx-auto mt-5 max-w-xl text-pretty text-base font-light text-zinc-400">
           Join thousands of traders using automated, data-driven signals to trade with confidence —
@@ -664,37 +755,62 @@ function CtaBand() {
 function Footer() {
   return (
     <footer id="support" className="scroll-mt-24 border-t border-white/10">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
-          <a href="#top" className="flex items-center gap-3" data-testid="footer-logo-link">
-            <span className="relative h-9 w-9 overflow-hidden rounded-xl ring-1 ring-white/10">
-              <Image src="/vertex-logo.png" alt="Vertex AI logo" fill className="object-cover" sizes="36px" />
-            </span>
-            <span className="font-display text-lg font-semibold tracking-tight text-white">
-              Vertex <span className="text-[#CCFF00]">AI</span>
-            </span>
-          </a>
-          <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
-            <Link
-              href="/privacy"
-              data-testid="footer-privacy-link"
-              className="font-display text-sm text-zinc-500 transition-colors hover:text-white"
-            >
-              Privacy Policy
-            </Link>
-            <a
-              href="https://t.me/Ayan_sx"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="footer-support-link"
-              className="font-display text-sm text-zinc-500 transition-colors hover:text-white"
-            >
-              Support
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+          <div>
+            <a href="#top" className="flex items-center gap-3" data-testid="footer-logo-link">
+              <span className="relative h-9 w-9 overflow-hidden rounded-xl ring-1 ring-white/10">
+                <Image src="/vertex-logo.png" alt="Vertex AI logo" fill className="object-cover" sizes="36px" />
+              </span>
+              <span className="font-display text-lg font-semibold tracking-tight text-white">
+                Vertex <span className="text-[#CCFF00]">AI</span>
+              </span>
             </a>
-          </nav>
+            <p className="font-display mt-4 max-w-xs text-sm font-light leading-relaxed text-zinc-500">
+              Advanced trading intelligence that turns real-time market data into clear,
+              confident decisions.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-display text-xs uppercase tracking-[0.2em] text-zinc-600">Explore</p>
+            <nav className="mt-4 flex flex-col gap-2.5">
+              {NAV_LINKS.slice(0, 3).map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="font-display text-sm text-zinc-500 transition-colors hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          <div>
+            <p className="font-display text-xs uppercase tracking-[0.2em] text-zinc-600">Legal & Support</p>
+            <nav className="mt-4 flex flex-col gap-2.5">
+              <Link
+                href="/privacy"
+                data-testid="footer-privacy-link"
+                className="font-display text-sm text-zinc-500 transition-colors hover:text-white"
+              >
+                Privacy Policy
+              </Link>
+              <a
+                href="https://t.me/Ayan_sx"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="footer-support-link"
+                className="font-display text-sm text-zinc-500 transition-colors hover:text-white"
+              >
+                Support
+              </a>
+            </nav>
+          </div>
         </div>
 
-        <div className="mt-10 flex gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
+        <div className="mt-12 flex gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
           <AlertTriangle className="h-5 w-5 shrink-0 text-[#CCFF00]/70" />
           <p className="font-display text-xs font-light leading-relaxed text-zinc-500">
             <span className="font-medium text-zinc-300">Trading Risk Disclaimer:</span> Trading
