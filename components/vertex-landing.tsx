@@ -91,7 +91,7 @@ const STEPS = [
 
 const FREE_STEPS = [
   { icon: UserPlus, title: 'Create Account', desc: 'Use our exclusive partner link to register your trading account.' },
-  { icon: Wallet, title: 'Deposit Capital', desc: 'Minimum $50 for your trading balance to get started.' },
+  { icon: Wallet, title: 'Deposit Capital', desc: 'Minimum $60 for your trading balance to get started.' },
   { icon: ShieldCheck, title: 'Verify UID', desc: 'Send your UID to our support team for instant verification.' },
 ]
 
@@ -746,9 +746,9 @@ function Pricing() {
 
           <div className="relative mt-6 flex items-end gap-2">
             <span className="font-display text-6xl font-semibold tracking-tight text-white sm:text-7xl">
-              $99
+              $50
             </span>
-            <span className="font-display mb-2.5 text-sm text-zinc-500">/ month</span>
+            <span className="font-display mb-2.5 text-sm text-zinc-500">/ Lifetime</span>
           </div>
           <p className="font-display relative mt-3 text-sm font-light text-zinc-400">
             Skip broker registration. Purchase a direct, unrestricted 1-month license immediately.
