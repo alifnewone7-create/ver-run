@@ -302,7 +302,7 @@ function Navbar() {
 /* ── hero ── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden px-4 pb-16 pt-20 sm:px-6 lg:pb-24 lg:pt-32">
+    <section className="relative overflow-hidden px-4 pb-8 pt-20 sm:px-6 lg:pb-10 lg:pt-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-0 h-[36rem] w-[72rem] -translate-x-1/2 rounded-full opacity-70 blur-[120px]"
@@ -364,7 +364,7 @@ function Hero() {
 
         <div
           aria-hidden="true"
-          className="mt-14 h-px w-full lg:mt-20"
+          className="mt-8 h-px w-full lg:mt-10"
           style={{
             background:
               'linear-gradient(90deg, transparent, rgba(204,255,0,0.35) 50%, transparent)',
@@ -378,7 +378,7 @@ function Hero() {
 /* ── features ── */
 function Features() {
   return (
-    <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 lg:py-28">
+    <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-12 sm:px-6 lg:py-16">
       <div className="mx-auto max-w-2xl text-center">
         <Label>Built for serious traders</Label>
         <h2 className="font-display mt-4 text-balance text-3xl font-medium tracking-tight text-white md:text-4xl">
