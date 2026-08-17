@@ -25,6 +25,7 @@ import {
   ArrowRight,
   Sparkles,
   Zap,
+  Radar,
 } from 'lucide-react'
 
 const LIME = '#CCFF00'
@@ -333,6 +334,20 @@ function Hero() {
       />
 
       <div className="relative mx-auto max-w-4xl text-center">
+        <div className="reveal-up mb-6 flex justify-center">
+          <span
+            data-testid="hero-badge"
+            className="font-display inline-flex items-center gap-2 rounded-xl border border-[#CCFF00]/25 px-4 py-2 text-[0.65rem] uppercase tracking-[0.2em] text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_0_20px_rgba(204,255,0,0.08)] backdrop-blur-md sm:text-xs"
+            style={{
+              backgroundImage:
+                'linear-gradient(135deg, rgba(204,255,0,0.16) 0%, rgba(204,255,0,0.05) 45%, rgba(255,255,255,0.02) 100%)',
+            }}
+          >
+            <Radar className="h-3.5 w-3.5 animate-[spin_5s_linear_infinite] text-[#CCFF00]" />
+            AI-Powered Trading Signals
+          </span>
+        </div>
+
         <h1
           className="font-display reveal-up text-balance text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-7xl"
           data-testid="hero-heading"
