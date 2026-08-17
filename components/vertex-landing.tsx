@@ -431,23 +431,23 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
       {/* top accent line */}
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="absolute inset-x-0 top-0 h-px opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100"
         style={{
           background: 'linear-gradient(90deg, transparent, rgba(204,255,0,0.7) 50%, transparent)',
         }}
       />
-      {/* faint circuit rings on wide cards */}
-      {wide && (
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-14 top-1/2 hidden -translate-y-1/2 lg:block"
-        >
-          <span className="block h-52 w-52 rounded-full border border-[#CCFF00]/[0.07]" />
-          <span className="absolute inset-6 rounded-full border border-[#CCFF00]/[0.1]" />
-          <span className="absolute inset-12 rounded-full border border-[#CCFF00]/[0.14]" />
-          <span className="absolute inset-[76px] rounded-full bg-[#CCFF00]/[0.06] blur-[2px]" />
-        </span>
-      )}
+      {/* faint circuit rings */}
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute top-1/2 -translate-y-1/2 ${
+          wide ? '-right-14 lg:block' : '-right-20 lg:hidden'
+        } block`}
+      >
+        <span className="block h-52 w-52 rounded-full border border-[#CCFF00]/[0.07]" />
+        <span className="absolute inset-6 rounded-full border border-[#CCFF00]/[0.1]" />
+        <span className="absolute inset-12 rounded-full border border-[#CCFF00]/[0.14]" />
+        <span className="absolute inset-[76px] rounded-full bg-[#CCFF00]/[0.06] blur-[2px]" />
+      </span>
 
       <div className="relative flex h-full flex-col p-7 sm:p-8">
         <div className="flex items-center gap-4">
@@ -460,8 +460,8 @@ function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean
           >
             <f.icon className="h-5 w-5 text-[#CCFF00]" />
             <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#CCFF00]/50 opacity-0 group-hover:opacity-100" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full border border-black/40 bg-[#CCFF00] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#CCFF00]/50 opacity-100 lg:opacity-0 lg:group-hover:opacity-100" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full border border-black/40 bg-[#CCFF00] opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100" />
             </span>
           </div>
           <h3 className="font-display text-xl tracking-tight text-zinc-100 transition-colors duration-300 group-hover:text-white">
