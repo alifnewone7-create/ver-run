@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -391,46 +391,89 @@ function Features() {
       </div>
 
       <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {FEATURES.map((f) => (
-          <div
-            key={f.title}
-            data-testid={`feature-card-${f.title.toLowerCase().replace(/\s+/g, '-')}`}
-            className="feature-card group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#CCFF00]/40 hover:shadow-[0_16px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(204,255,0,0.07)] sm:p-8"
-          >
-            {/* top accent line */}
-            <span
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-              style={{
-                background:
-                  'linear-gradient(90deg, transparent, rgba(204,255,0,0.7) 50%, transparent)',
-              }}
-            />
-            {/* corner glow */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-[50px] transition-opacity duration-500 group-hover:opacity-100"
-              style={{ background: 'radial-gradient(circle, rgba(204,255,0,0.16), transparent 70%)' }}
-            />
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#CCFF00]/30 shadow-[0_0_18px_rgba(204,255,0,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_26px_rgba(204,255,0,0.25),inset_0_1px_0_rgba(255,255,255,0.12)]"
-              style={{
-                background:
-                  'linear-gradient(135deg, rgba(204,255,0,0.22) 0%, rgba(204,255,0,0.06) 60%, rgba(255,255,255,0.02) 100%)',
-              }}
-            >
-              <f.icon className="h-5 w-5 text-[#CCFF00]" />
-            </div>
-
-            <h3 className="font-display relative mt-6 text-xl tracking-tight text-zinc-100 transition-colors duration-300 group-hover:text-white">
-              {f.title}
-            </h3>
-            <p className="font-display relative mt-3 text-sm font-light leading-relaxed text-zinc-400">
-              {f.desc}
-            </p>
-          </div>
+        {FEATURES.map((f, i) => (
+          <FeatureCard key={f.title} f={f} wide={i === 0 || i === 3 || i === 4} />
         ))}
       </div>
     </section>
+  )
+}
+
+function FeatureCard({ f, wide }: { f: (typeof FEATURES)[number]; wide?: boolean }) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`)
+    el.style.setProperty('--my', `${e.clientY - r.top}px`)
+  }
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      data-testid={`feature-card-${f.title.toLowerCase().replace(/\s+/g, '-')}`}
+      className={`group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#CCFF00]/40 hover:shadow-[0_16px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(204,255,0,0.07)] ${
+        wide ? 'lg:col-span-2' : ''
+      }`}
+    >
+      {/* cursor spotlight */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            'radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(204,255,0,0.09), transparent 70%)',
+        }}
+      />
+      {/* top accent line */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: 'linear-gradient(90deg, transparent, rgba(204,255,0,0.7) 50%, transparent)',
+        }}
+      />
+      {/* faint circuit rings on wide cards */}
+      {wide && (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-14 top-1/2 hidden -translate-y-1/2 lg:block"
+        >
+          <span className="block h-52 w-52 rounded-full border border-[#CCFF00]/[0.07]" />
+          <span className="absolute inset-6 rounded-full border border-[#CCFF00]/[0.1]" />
+          <span className="absolute inset-12 rounded-full border border-[#CCFF00]/[0.14]" />
+          <span className="absolute inset-[76px] rounded-full bg-[#CCFF00]/[0.06] blur-[2px]" />
+        </span>
+      )}
+
+      <div className="relative flex h-full flex-col p-7 sm:p-8">
+        <div className="flex items-center gap-4">
+          <div
+            className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#CCFF00]/30 shadow-[0_0_18px_rgba(204,255,0,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 group-hover:shadow-[0_0_26px_rgba(204,255,0,0.28),inset_0_1px_0_rgba(255,255,255,0.12)]"
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(204,255,0,0.22) 0%, rgba(204,255,0,0.06) 60%, rgba(255,255,255,0.02) 100%)',
+            }}
+          >
+            <f.icon className="h-5 w-5 text-[#CCFF00]" />
+            <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#CCFF00]/50 opacity-0 group-hover:opacity-100" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full border border-black/40 bg-[#CCFF00] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            </span>
+          </div>
+          <h3 className="font-display text-xl tracking-tight text-zinc-100 transition-colors duration-300 group-hover:text-white">
+            {f.title}
+          </h3>
+        </div>
+
+        <p className={`font-display mt-5 text-sm font-light leading-relaxed text-zinc-400 ${wide ? 'lg:max-w-md' : ''}`}>
+          {f.desc}
+        </p>
+      </div>
+    </div>
   )
 }
 
