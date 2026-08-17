@@ -1,6 +1,6 @@
 // SERVER-ONLY admin panel authentication.
 //
-// The admin panel lives at /secret-portal-sx and is protected by a fixed set
+// The admin panel lives at /Vertex-Private-Island and is protected by a fixed set
 // of credentials kept here on the server (never shipped to the client). A
 // successful login sets a short HMAC-signed, httpOnly cookie that subsequent
 // admin API calls verify.
