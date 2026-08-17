@@ -391,17 +391,57 @@ function Features() {
       </div>
 
       <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {FEATURES.map((f) => (
+        {FEATURES.map((f, i) => (
           <div
             key={f.title}
             data-testid={`feature-card-${f.title.toLowerCase().replace(/\s+/g, '-')}`}
-            className={`${GLASS} group p-7 sm:p-8`}
+            className="feature-card group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#CCFF00]/40 hover:shadow-[0_16px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(204,255,0,0.07)] sm:p-8"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#CCFF00]/25 bg-[#CCFF00]/10 transition-transform duration-300 group-hover:-translate-y-0.5">
+            {/* top accent line */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              style={{
+                background:
+                  'linear-gradient(90deg, transparent, rgba(204,255,0,0.7) 50%, transparent)',
+              }}
+            />
+            {/* corner glow */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-[50px] transition-opacity duration-500 group-hover:opacity-100"
+              style={{ background: 'radial-gradient(circle, rgba(204,255,0,0.16), transparent 70%)' }}
+            />
+            {/* faint index */}
+            <span className="font-display pointer-events-none absolute right-5 top-4 select-none text-xs tracking-[0.25em] text-white/[0.14] transition-colors duration-300 group-hover:text-[#CCFF00]/40">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#CCFF00]/30 shadow-[0_0_18px_rgba(204,255,0,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_26px_rgba(204,255,0,0.25),inset_0_1px_0_rgba(255,255,255,0.12)]"
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(204,255,0,0.22) 0%, rgba(204,255,0,0.06) 60%, rgba(255,255,255,0.02) 100%)',
+              }}
+            >
               <f.icon className="h-5 w-5 text-[#CCFF00]" />
             </div>
-            <h3 className="font-display mt-6 text-xl tracking-tight text-zinc-100">{f.title}</h3>
-            <p className="font-display mt-3 text-sm font-light leading-relaxed text-zinc-400">{f.desc}</p>
+
+            <h3 className="font-display relative mt-6 text-xl tracking-tight text-zinc-100 transition-colors duration-300 group-hover:text-white">
+              {f.title}
+            </h3>
+            <p className="font-display relative mt-3 text-sm font-light leading-relaxed text-zinc-400">
+              {f.desc}
+            </p>
+
+            <div className="relative mt-6 flex items-center gap-2">
+              <span
+                aria-hidden="true"
+                className="h-px w-8 bg-[#CCFF00]/30 transition-all duration-300 group-hover:w-14 group-hover:bg-[#CCFF00]/60"
+              />
+              <span className="font-display text-[0.65rem] uppercase tracking-[0.2em] text-zinc-600 transition-colors duration-300 group-hover:text-[#CCFF00]/70">
+                Vertex core
+              </span>
+            </div>
           </div>
         ))}
       </div>

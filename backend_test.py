@@ -9,7 +9,7 @@ import json
 from typing import Dict, Any, Optional
 
 # Base URL from .env
-BASE_URL = "https://vnew-full-stack.preview.emergentagent.com"
+BASE_URL = "https://lime-dark-ui.preview.emergentagent.com"
 
 # Admin credentials from lib/server/admin-auth.ts
 ADMIN_CREDS = {
