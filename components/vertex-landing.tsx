@@ -32,7 +32,7 @@ const NAV_LINKS = [
   { label: 'Features', href: '#features' },
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Pricing', href: '#pricing' },
-  { label: 'Support', href: 'https://t.me/Vertex_Ai_Support', external: true },
+  { label: 'Support', href: 'https://t.me/Miraj_X_Trader_Official', external: true },
 ]
 
 const FEATURES = [
@@ -715,7 +715,7 @@ function Pricing() {
               Create Quotex Account
             </a>
             <a
-              href="https://t.me/Vertex_Ai_Support"
+              href="https://t.me/Miraj_X_Trader_Official"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="pricing-contact-admin-button"
@@ -772,7 +772,7 @@ function Pricing() {
           </ul>
 
           <a
-            href="https://t.me/Vertex_Ai_Support"
+            href="https://t.me/Miraj_X_Trader_Official"
             target="_blank"
             rel="noopener noreferrer"
             data-testid="pricing-purchase-button"
@@ -868,7 +868,7 @@ function Footer() {
                 Privacy Policy
               </Link>
               <a
-                href="https://t.me/Vertex_Ai_Support"
+                href="https://t.me/Miraj_X_Trader_Official"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-support-link"

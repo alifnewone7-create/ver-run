@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 
 const FOOTER_LINKS = [
   { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Support', href: 'https://t.me/Vertex_Ai_Support', external: true },
+  { label: 'Support', href: 'https://t.me/Miraj_X_Trader_Official', external: true },
 ]
 
 export function SiteFooter() {
