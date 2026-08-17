@@ -326,7 +326,7 @@ function Navbar() {
 /* ── hero ── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden px-4 pb-8 pt-20 sm:px-6 lg:pb-10 lg:pt-32">
+    <section className="relative overflow-hidden px-4 pb-8 pt-10 sm:px-6 lg:pb-10 lg:pt-16">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-0 h-[36rem] w-[72rem] -translate-x-1/2 rounded-full opacity-70 blur-[120px]"
