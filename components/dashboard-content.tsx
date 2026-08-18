@@ -147,7 +147,7 @@ export function DashboardContent({ profile }: { profile: UserProfile }) {
                 <Link
                   href="/otc-chart-analyzer"
                   data-testid="dashboard-cta-analyze"
-                  className="btn-luxe font-display inline-flex h-12 flex-1 items-center justify-center gap-2 px-6 text-sm sm:text-base"
+                  className="btn-luxe font-display inline-flex h-12 w-full items-center justify-center gap-2 px-6 text-sm sm:w-auto sm:flex-1 sm:text-base"
                 >
                   <ScanLine className="h-4 w-4" />
                   Start Analyzing
@@ -156,7 +156,7 @@ export function DashboardContent({ profile }: { profile: UserProfile }) {
                 <Link
                   href="/live-signals"
                   data-testid="dashboard-cta-live"
-                  className="btn-luxe-outline font-display inline-flex h-12 flex-1 items-center justify-center gap-2 px-6 text-sm sm:text-base"
+                  className="btn-luxe-outline font-display inline-flex h-12 w-full items-center justify-center gap-2 px-6 text-sm sm:w-auto sm:flex-1 sm:text-base"
                 >
                   <Radio className="h-4 w-4 text-[#CCFF00]" />
                   Live Signals
