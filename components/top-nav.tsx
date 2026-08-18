@@ -17,6 +17,7 @@ import {
   X,
   BadgeCheck,
   IdCard,
+  ShieldCheck,
   Mail,
   Copy,
   Check,
@@ -256,60 +257,98 @@ export function TopNav() {
                   onClick={() => setProfileOpen(false)}
                   className="animate-in fade-in absolute inset-0 cursor-default bg-background/75 backdrop-blur-sm duration-200"
                 />
-                <div className="profile-card relative z-10 w-full max-w-md overflow-hidden rounded-3xl">
-                  <div className="profile-card__header flex items-start justify-between gap-4 border-b border-border/70 px-5 py-4 sm:px-6">
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                        Vertex account
-                      </p>
-                      <h2 className="mt-1 text-lg font-bold tracking-tight">
-                        Profile details
-                      </h2>
-                    </div>
+                <div
+                  data-testid="profile-details-card"
+                  className="animate-in fade-in zoom-in-95 border-luxe surface-luxe relative z-10 w-full max-w-md overflow-hidden rounded-3xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] duration-200"
+                >
+                  <span aria-hidden className="welcome-luxe-border rounded-3xl" />
+                  {/* top lime glow */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -top-24 left-1/2 h-48 w-[26rem] -translate-x-1/2 rounded-full blur-[70px]"
+                    style={{
+                      background:
+                        'radial-gradient(ellipse at center, rgba(204,255,0,0.18), transparent 70%)',
+                    }}
+                  />
+
+                  {/* close */}
+                  <span className="absolute right-4 top-4 z-20">
                     <button
                       type="button"
                       onClick={() => setProfileOpen(false)}
-                        aria-label="Close profile"
-                        className="btn-luxe-outline flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
-                      >
-                        <X className="h-5 w-5" strokeWidth={2.25} />
+                      aria-label="Close profile"
+                      data-testid="profile-close-button"
+                      className="btn-luxe-outline flex h-9 w-9 items-center justify-center"
+                    >
+                      <X className="h-[18px] w-[18px]" strokeWidth={2.25} />
                     </button>
-                  </div>
+                  </span>
 
-                  <div className="flex flex-col gap-5 p-5 sm:p-6">
-                    <section className="profile-card__identity flex items-center gap-4 rounded-2xl p-4 sm:p-5">
-                      <span className="profile-card__avatar relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl sm:h-24 sm:w-24">
+                  <div className="relative z-10 flex flex-col items-center px-5 pb-6 pt-9 text-center sm:px-7 sm:pt-10">
+                    <p className="font-display text-[0.6rem] uppercase tracking-[0.24em] text-zinc-500">
+                      Vertex account
+                    </p>
+
+                    {/* avatar */}
+                    <span className="relative mt-5 h-24 w-24 sm:h-28 sm:w-28">
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute -inset-2 rounded-[1.6rem] bg-[#CCFF00]/12 blur-xl"
+                      />
+                      <span className="relative z-10 block h-full w-full overflow-hidden rounded-[1.4rem] ring-2 ring-[#CCFF00]/45">
                         <Image
                           src="/vertex-profile.png"
                           alt={`${firstName} profile`}
-                          width={96}
-                          height={96}
-                          className="h-full w-full rounded-[14px] border-2 border-accent object-cover"
+                          width={112}
+                          height={112}
+                          className="h-full w-full object-cover"
                         />
                       </span>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-xl font-bold tracking-tight sm:text-2xl">
-                          {profile?.name || 'Trader'}
-                        </p>
-                        <span className="profile-card__status mt-2.5 inline-flex items-center gap-1.5 rounded-full px-3 py-1">
-                          <BadgeCheck className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                          <span className="text-[11px] font-semibold uppercase leading-none tracking-wide">
-                            Active account
-                          </span>
-                        </span>
-                      </div>
-                    </section>
+                    </span>
 
-                    <div className="flex flex-col gap-3">
-                      <section className="profile-card__detail flex min-w-0 items-center gap-3 rounded-2xl p-4">
-                        <span className="profile-card__icon flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                    <h2 className="font-display mt-4 max-w-full truncate text-2xl font-medium tracking-tight text-white sm:text-3xl">
+                      {profile?.name || 'Trader'}
+                    </h2>
+
+                    <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+                      <span
+                        data-testid="profile-plan-badge"
+                        className="font-display inline-flex items-center gap-1.5 rounded-full border border-[#CCFF00]/35 bg-[#CCFF00]/10 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#CCFF00]"
+                      >
+                        <IdCard className="h-3 w-3" />
+                        {profile?.plan || 'free'} plan
+                      </span>
+                      <span className="font-display inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-zinc-300">
+                        <BadgeCheck className="h-3 w-3 text-[#CCFF00]" />
+                        Active
+                      </span>
+                    </div>
+
+                    {/* divider */}
+                    <div
+                      aria-hidden
+                      className="mt-6 h-px w-full"
+                      style={{
+                        background:
+                          'linear-gradient(90deg, transparent, rgba(204,255,0,0.3) 50%, transparent)',
+                      }}
+                    />
+
+                    {/* details */}
+                    <div className="mt-5 flex w-full flex-col gap-3 text-left">
+                      <section
+                        data-testid="profile-email-row"
+                        className="flex min-w-0 items-center gap-3 rounded-2xl border border-white/[0.07] bg-[#0A0C08]/80 p-3.5 sm:p-4"
+                      >
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#CCFF00]/25 bg-[#0A0C08] text-[#CCFF00] shadow-[0_0_14px_rgba(204,255,0,0.1)]">
                           <Mail className="h-4 w-4" />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                          <p className="font-display text-[0.6rem] uppercase tracking-[0.18em] text-zinc-500">
                             Email address
                           </p>
-                          <p className="mt-1 break-all text-sm font-semibold lowercase leading-snug">
+                          <p className="font-display mt-0.5 break-all text-sm font-medium lowercase leading-snug text-zinc-100">
                             {(profile?.email || '—').toLowerCase()}
                           </p>
                         </div>
@@ -318,39 +357,29 @@ export function TopNav() {
                           onClick={handleCopyEmail}
                           aria-label={copied ? 'Email copied' : 'Copy email address'}
                           disabled={!profile?.email}
-                          className="profile-card__copy flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors disabled:opacity-40"
+                          data-testid="profile-copy-email-button"
+                          className="btn-luxe-outline flex h-9 w-9 shrink-0 items-center justify-center disabled:opacity-40"
                         >
                           {copied ? (
-                            <Check className="h-4 w-4 text-accent" />
+                            <Check className="h-4 w-4 text-[#CCFF00]" />
                           ) : (
                             <Copy className="h-4 w-4" />
                           )}
                         </button>
                       </section>
-
-                      <section className="profile-card__tier flex min-w-0 items-center gap-3 rounded-2xl p-4">
-                        <span className="profile-card__tier-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                          <IdCard className="h-4 w-4" aria-hidden="true" />
-                        </span>
-                        <div className="min-w-0">
-                          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                            Account tier
-                          </p>
-                          <p className="mt-1 truncate text-sm font-bold capitalize text-foreground">
-                            {profile?.plan || 'free'} plan
-                          </p>
-                        </div>
-                      </section>
                     </div>
 
-                    <div className="flex items-center justify-between gap-4 border-t border-border/60 pt-5">
-                      <p className="hidden text-xs leading-relaxed text-muted-foreground sm:block">
+                    {/* footer */}
+                    <div className="mt-6 flex w-full flex-col-reverse items-center gap-3 sm:flex-row sm:justify-between">
+                      <p className="font-display flex items-center gap-1.5 text-xs text-zinc-500">
+                        <ShieldCheck className="h-3.5 w-3.5 text-[#CCFF00]/70" />
                         Signed in securely
                       </p>
                       <button
                         type="button"
                         onClick={requestLogout}
-                        className="profile-card__logout flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold sm:w-auto"
+                        data-testid="profile-logout-button"
+                        className="btn-clay-plum font-display inline-flex h-11 w-full items-center justify-center gap-2 px-6 text-sm sm:w-auto"
                       >
                         <LogOut className="h-4 w-4" />
                         Log out
