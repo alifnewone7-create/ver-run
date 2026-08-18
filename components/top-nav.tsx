@@ -254,11 +254,11 @@ export function TopNav() {
                   type="button"
                   aria-label="Close profile"
                   onClick={() => setProfileOpen(false)}
-                  className="animate-in fade-in absolute inset-0 cursor-default bg-background/75 backdrop-blur-sm duration-200"
+                  className="absolute inset-0 cursor-default bg-background/75 backdrop-blur-sm"
                 />
                 <div
                   data-testid="profile-details-card"
-                  className="animate-in fade-in zoom-in-95 border-luxe surface-luxe relative z-10 w-full max-w-md overflow-hidden rounded-3xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] duration-200"
+                  className="border-luxe surface-luxe relative z-10 w-full max-w-md overflow-hidden rounded-3xl shadow-[0_24px_80px_rgba(0,0,0,0.6)]"
                 >
                   <span aria-hidden className="welcome-luxe-border rounded-3xl" />
                   {/* top lime glow */}
@@ -285,7 +285,8 @@ export function TopNav() {
                   </span>
 
                   <div className="relative z-10 flex flex-col items-center px-5 pb-6 pt-9 text-center sm:px-7 sm:pt-10">
-                    <p className="font-display text-[0.6rem] uppercase tracking-[0.24em] text-zinc-500">
+                    <p className="font-display inline-flex items-center gap-2 rounded-full border border-[#CCFF00]/25 bg-[#0A0C08]/80 px-4 py-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-zinc-300">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#CCFF00] shadow-[0_0_8px_rgba(204,255,0,0.8)]" />
                       Vertex account
                     </p>
 
