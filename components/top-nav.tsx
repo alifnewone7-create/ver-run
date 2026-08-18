@@ -15,7 +15,6 @@ import {
   LogOut,
   Menu,
   X,
-  BadgeCheck,
   IdCard,
   ShieldCheck,
   Mail,
@@ -318,10 +317,6 @@ export function TopNav() {
                       >
                         <IdCard className="h-3 w-3" />
                         {profile?.plan || 'free'} plan
-                      </span>
-                      <span className="font-display inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-zinc-300">
-                        <BadgeCheck className="h-3 w-3 text-[#CCFF00]" />
-                        Active
                       </span>
                     </div>
 
