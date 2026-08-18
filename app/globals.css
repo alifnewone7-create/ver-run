@@ -2792,54 +2792,77 @@
 .btn-luxe,
 button.btn-luxe,
 a.btn-luxe {
-  background-image: none;
-  background-color: var(--primary);
-  color: var(--primary-foreground);
+  background-image: linear-gradient(180deg, oklch(0.96 0.2 121) 0%, oklch(0.9 0.22 125) 100%);
+  background-color: transparent;
+  color: oklch(0.17 0.02 128);
   border: none;
-  border-radius: 9999px;
+  border-radius: 14px;
   font-weight: 700;
   letter-spacing: 0.01em;
-  box-shadow: none;
-  transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+  box-shadow:
+    inset 0 2px 1px oklch(1 0 0 / 0.5),
+    inset 0 -3px 0 oklch(0.68 0.18 124 / 0.9),
+    0 5px 0 oklch(0.46 0.13 124 / 0.55),
+    0 16px 28px -14px oklch(0.9 0.22 124 / 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
 }
 .btn-luxe:hover {
-  filter: none;
-  background-color: oklch(0.97 0.2 124);
-  box-shadow: none;
+  filter: brightness(1.06);
+  background-color: transparent;
 }
 .btn-luxe:active {
-  transform: scale(0.985);
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 2px 1px oklch(1 0 0 / 0.4),
+    inset 0 -2px 0 oklch(0.68 0.18 124 / 0.8),
+    0 2px 0 oklch(0.46 0.13 124 / 0.5),
+    0 8px 14px -10px oklch(0.9 0.22 124 / 0.4);
 }
 .btn-luxe::before {
   display: none !important;
 }
 .btn-luxe svg {
-  color: var(--primary-foreground);
+  color: oklch(0.17 0.02 128);
 }
 
-/* ── buttons: quiet graphite flat pill (secondary / outline) ── */
+/* ── buttons: dark clay pill (secondary / outline) — same style as home page ── */
 .btn-luxe-outline,
 button.btn-luxe-outline,
 a.btn-luxe-outline {
-  background-image: none;
-  background-color: oklch(0.24 0.006 240);
+  background-image: linear-gradient(180deg, oklch(0.31 0.008 240) 0%, oklch(0.245 0.008 240) 100%);
+  background-color: transparent;
   color: var(--foreground);
-  border: 1px solid oklch(1 0 0 / 0.1);
-  border-radius: 9999px;
+  border: none;
+  border-radius: 14px;
   font-weight: 600;
-  box-shadow: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  box-shadow:
+    inset 0 1.5px 0 oklch(1 0 0 / 0.14),
+    inset 0 -3px 0 oklch(0.13 0.006 240),
+    0 5px 0 oklch(0.1 0.006 240 / 0.9),
+    0 16px 26px -16px oklch(0 0 0 / 0.85);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
 }
 .btn-luxe-outline:hover {
-  filter: none;
-  background-color: oklch(0.28 0.006 240);
-  border-color: oklch(1 0 0 / 0.18);
-  box-shadow: none;
+  filter: brightness(1.12);
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow:
+    inset 0 1.5px 0 oklch(1 0 0 / 0.14),
+    inset 0 -3px 0 oklch(0.13 0.006 240),
+    0 5px 0 oklch(0.1 0.006 240 / 0.9),
+    0 16px 26px -16px oklch(0 0 0 / 0.85);
+}
+.btn-luxe-outline:active {
+  transform: translateY(3px);
 }
 
 /* nav pills / tabs keep the pill silhouette */
 .btn-luxe.no-sheen {
   border-radius: 9999px;
+  box-shadow: none;
+}
+.btn-luxe.no-sheen:active {
+  transform: scale(0.985);
 }
 
 /* ── accent type: solid lime, no rainbow gradient, no shimmer ── */
