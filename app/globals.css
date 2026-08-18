@@ -2751,19 +2751,32 @@
 /* graphite panels instead of tinted glass */
 .surface-luxe {
   background-image: linear-gradient(
-    170deg,
-    oklch(0.245 0.006 240 / 0.96) 0%,
-    oklch(0.222 0.006 240 / 0.96) 60%,
-    oklch(0.208 0.006 240 / 0.96) 100%
+    180deg,
+    rgba(13, 16, 8, 0.92) 0%,
+    rgba(9, 11, 6, 0.9) 100%
   );
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
 }
 .border-luxe::after {
   background: linear-gradient(
     140deg,
-    oklch(1 0 0 / 0.14),
-    oklch(1 0 0 / 0.05) 45%,
+    rgba(204, 255, 0, 0.28),
+    rgba(204, 255, 0, 0.07) 45%,
     transparent 70%
   );
+}
+
+/* home-page background — same radial lime glow used on the landing page */
+.home-bg {
+  background-color: #020302;
+  background-image: radial-gradient(
+    ellipse 90% 55% at 50% -10%,
+    #132600 0%,
+    rgba(6, 10, 4, 0.85) 45%,
+    #020302 100%
+  );
+  background-attachment: fixed;
 }
 .card-corner-glow::before {
   background: radial-gradient(

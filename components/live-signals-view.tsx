@@ -20,7 +20,6 @@ import {
   Info,
   RefreshCw,
 } from 'lucide-react'
-import { StarField } from '@/components/star-field'
 import { TopNav } from '@/components/top-nav'
 import { AuthGuard } from '@/components/auth-guard'
 import { PairFlags } from '@/components/pair-flags'
@@ -70,8 +69,7 @@ export function LiveSignalsView() {
   return (
     <AuthGuard>
       {() => (
-        <main className="relative flex min-h-dvh flex-col bg-background">
-          <StarField />
+        <main className="home-bg relative flex min-h-dvh flex-col">
           <TopNav />
           <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:py-12">
             <LiveSignalStudio />

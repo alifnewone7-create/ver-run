@@ -10,7 +10,6 @@ import {
   LayoutGrid,
   type LucideIcon,
 } from 'lucide-react'
-import { StarField } from '@/components/star-field'
 import { TopNav } from '@/components/top-nav'
 import { TradingChart } from '@/components/trading-chart'
 import { ToolCards } from '@/components/tool-cards'
@@ -31,9 +30,7 @@ export function DashboardContent({ profile }: { profile: UserProfile }) {
   const TierIcon = TIER_ICON[tier]
 
   return (
-    <main className="relative min-h-dvh bg-background">
-      <StarField />
-
+    <main className="home-bg relative min-h-dvh">
       <TopNav />
 
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-5 px-4 py-8 sm:gap-6 sm:px-6 sm:py-10 lg:py-12">

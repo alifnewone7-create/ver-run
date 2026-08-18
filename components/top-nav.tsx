@@ -10,7 +10,6 @@ import {
   ScanLine,
   ScanSearch,
   Telescope,
-  Newspaper,
   Radio,
   SlidersHorizontal,
   LogOut,
@@ -30,7 +29,6 @@ const navLinks = [
   { label: 'OTC Chart Analyzer', href: '/otc-chart-analyzer', icon: ScanLine },
   { label: 'Real Chart Analyzer', href: '/real-chart-analyzer', icon: ScanSearch },
   { label: 'Future Signals', href: '/future-signals', icon: Telescope },
-  { label: 'News Signals', href: '/news-signals', icon: Newspaper },
   { label: 'Live Signals', href: '/live-signals', icon: Radio },
   { label: 'Management', href: '/management', icon: SlidersHorizontal },
 ]
@@ -52,7 +50,6 @@ const navSections = [
     links: [
       { label: 'Live Signals', href: '/live-signals', icon: Radio },
       { label: 'Future Signals', href: '/future-signals', icon: Telescope },
-      { label: 'News Signals', href: '/news-signals', icon: Newspaper },
     ],
   },
   {

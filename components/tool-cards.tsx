@@ -5,7 +5,6 @@ import {
   ScanLine,
   ScanSearch,
   Telescope,
-  Newspaper,
   Radio,
   SlidersHorizontal,
   ArrowUpRight,
@@ -51,13 +50,6 @@ const tools: Tool[] = [
     ...GOLD,
   },
   {
-    name: 'News Signals',
-    subtitle: 'Trade on breaking news.',
-    href: '/news-signals',
-    icon: Newspaper,
-    ...PURPLE,
-  },
-  {
     name: 'Live Signals',
     subtitle: 'Real-time entries as they fire.',
     href: '/live-signals',
@@ -94,7 +86,7 @@ function ToolCard({ tool, index }: { tool: Tool; index: number }) {
           animationDelay: `${index * 80}ms`,
         } as React.CSSProperties
       }
-      className="group animate-in fade-in slide-in-from-bottom-3 relative flex items-center gap-4 overflow-hidden rounded-2xl border border-[color:var(--c-glow-soft)] bg-[oklch(0.225_0.006_240)] p-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-[color:var(--c-glow)] hover:shadow-[0_18px_45px_-22px_var(--c-glow)] sm:p-5"
+      className="group animate-in fade-in slide-in-from-bottom-3 relative flex items-center gap-4 overflow-hidden rounded-2xl border border-[color:var(--c-glow-soft)] bg-[#0A0C08]/90 p-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-[color:var(--c-glow)] hover:shadow-[0_18px_45px_-22px_var(--c-glow)] sm:p-5"
     >
       {/* left accent bar that lights up on hover */}
       <span
