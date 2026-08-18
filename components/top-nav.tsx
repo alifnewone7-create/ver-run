@@ -425,7 +425,7 @@ export function TopNav() {
                         className={cn(
                           'group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all',
                           active
-                            ? 'btn-luxe no-sheen'
+                            ? 'btn-luxe'
                             : 'text-muted-foreground hover:bg-input/30 hover:text-foreground',
                         )}
                       >
