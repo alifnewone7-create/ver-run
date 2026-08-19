@@ -11,7 +11,7 @@ import {
   Vault,
   Medal,
   Leaf,
-  StarFour,
+  SealCheck,
   SketchLogo,
   ShieldStar,
   Stack,
@@ -89,7 +89,7 @@ export const LayoutGrid = d(SquaresFour)
 // tiers
 export const Gift = d(Leaf)
 export const Rocket = d(Medal)
-export const Star = d(StarFour)
+export const Star = d(SealCheck)
 export const Crown = d(SketchLogo)
 export const ShieldCheck = d(ShieldStar)
 
