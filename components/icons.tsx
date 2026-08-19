@@ -111,7 +111,10 @@ export const ShieldBadge = d(PShieldCheck)
 export const Info = d(PInfo)
 export const RefreshCw = d(ArrowsClockwise)
 export const Check = d(PCheck)
-export const X = d(PX)
+export const X: AppIcon = ((props: Record<string, unknown>) => {
+  const { strokeWidth: _sw, ...rest } = props
+  return <PX weight="bold" {...rest} />
+}) as AppIcon
 export const Radar = d(Crosshair)
 export const Waypoints = d(ShareNetwork)
 export const Minus = d(PMinus)
