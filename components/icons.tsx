@@ -10,9 +10,9 @@ import {
   Broadcast,
   Vault,
   Gift as PGift,
-  RocketLaunch,
-  Star as PStar,
-  Crown as PCrown,
+  Medal,
+  Diamond,
+  SketchLogo,
   ShieldStar,
   Stack,
   Lightning,
@@ -88,9 +88,9 @@ export const LayoutGrid = d(SquaresFour)
 
 // tiers
 export const Gift = d(PGift)
-export const Rocket = d(RocketLaunch)
-export const Star = d(PStar)
-export const Crown = d(PCrown)
+export const Rocket = d(Medal)
+export const Star = d(Diamond)
+export const Crown = d(SketchLogo)
 export const ShieldCheck = d(ShieldStar)
 
 // generic
