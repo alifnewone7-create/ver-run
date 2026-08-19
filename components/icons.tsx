@@ -129,7 +129,10 @@ export const CircleDollarSign = d(CurrencyCircleDollar)
 export const Coins = d(PCoins)
 export const Lightbulb = d(PLightbulb)
 export const AlertTriangle = d(Warning)
-export const Upload = d(UploadSimple)
+export const Upload: AppIcon = ((props: Record<string, unknown>) => {
+  const { strokeWidth: _sw, ...rest } = props
+  return <UploadSimple weight="bold" {...rest} />
+}) as AppIcon
 export const Scan = d(PScan)
 export const TrendingUp = d(TrendUp)
 export const Activity = d(Pulse)
