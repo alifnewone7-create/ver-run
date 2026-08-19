@@ -4,7 +4,6 @@
 import type * as React from 'react'
 import {
   SquaresFour,
-  ChartLineUp,
   PresentationChart,
   Binoculars,
   Broadcast,
@@ -78,7 +77,7 @@ const d = (I: Icon): AppIcon => {
 
 // navigation / tool identities
 export const LayoutDashboard = d(SquaresFour)
-export const ScanLine = d(ChartLineUp)
+export const ScanLine = d(PScan)
 export const ScanSearch = d(PresentationChart)
 export const Telescope = d(Binoculars)
 export const Radio = d(Broadcast)
