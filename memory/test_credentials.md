@@ -5,3 +5,8 @@
 ## Test User (Firebase auth, free tier)
 - Email: uitest1787059924@vertex.com
 - Password: Test1234!
+
+## Admin Panel (/Vertex-Private-Island)
+- Username: iamhear
+- Password: iamhear
+- Secret Key: iamhear
