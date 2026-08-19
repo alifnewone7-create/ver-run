@@ -271,24 +271,24 @@ export function TopNav() {
                     }}
                   />
 
-                  {/* close */}
-                  <span className="absolute right-4 top-4 z-20">
+                  {/* section header */}
+                  <div className="relative z-10 flex items-center justify-between gap-3 border-b border-[#CCFF00]/15 bg-[#0A0C08]/70 px-5 py-3.5 sm:px-6">
+                    <p className="font-display inline-flex items-center gap-2 text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-zinc-200">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#CCFF00] shadow-[0_0_8px_rgba(204,255,0,0.8)]" />
+                      Vertex account
+                    </p>
                     <button
                       type="button"
                       onClick={() => setProfileOpen(false)}
                       aria-label="Close profile"
                       data-testid="profile-close-button"
-                      className="btn-luxe-outline flex h-9 w-9 items-center justify-center"
+                      className="btn-luxe-outline flex h-8 w-8 items-center justify-center"
                     >
-                      <X className="h-[18px] w-[18px]" strokeWidth={2.25} />
+                      <X className="h-4 w-4" strokeWidth={2.25} />
                     </button>
-                  </span>
+                  </div>
 
-                  <div className="relative z-10 flex flex-col items-center px-5 pb-6 pt-9 text-center sm:px-7 sm:pt-10">
-                    <p className="font-display inline-flex items-center gap-2 rounded-full border border-[#CCFF00]/25 bg-[#0A0C08]/80 px-4 py-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-zinc-300">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#CCFF00] shadow-[0_0_8px_rgba(204,255,0,0.8)]" />
-                      Vertex account
-                    </p>
+                  <div className="relative z-10 flex flex-col items-center px-5 pb-6 pt-6 text-center sm:px-7 sm:pt-7">
 
                     {/* avatar */}
                     <span className="relative mt-5 h-24 w-24 sm:h-28 sm:w-28">
