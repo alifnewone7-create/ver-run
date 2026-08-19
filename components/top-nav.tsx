@@ -23,6 +23,44 @@ import {
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { cn } from '@/lib/utils'
+import { normalizeTier, type Tier } from '@/lib/tiers'
+import { Gift, Rocket, Star, Crown } from 'lucide-react'
+
+const TIER_ROW_ICONS: Record<Tier, typeof Gift> = {
+  free: Gift,
+  basic: Rocket,
+  standard: Star,
+  premium: Crown,
+  admin: ShieldCheck,
+}
+
+const TIER_STYLES: Record<Tier, { gradient: string; border: string; text: string }> = {
+  free: {
+    gradient: 'linear-gradient(135deg, rgba(120,130,120,0.18), rgba(20,24,18,0.85))',
+    border: 'border-zinc-400/25',
+    text: 'text-zinc-200',
+  },
+  basic: {
+    gradient: 'linear-gradient(135deg, rgba(204,255,0,0.16), rgba(15,20,6,0.9))',
+    border: 'border-[#CCFF00]/30',
+    text: 'text-[#CCFF00]',
+  },
+  standard: {
+    gradient: 'linear-gradient(135deg, rgba(56,200,255,0.16), rgba(6,16,22,0.9))',
+    border: 'border-sky-400/30',
+    text: 'text-sky-300',
+  },
+  premium: {
+    gradient: 'linear-gradient(135deg, rgba(255,190,60,0.18), rgba(24,16,4,0.9))',
+    border: 'border-amber-400/30',
+    text: 'text-amber-300',
+  },
+  admin: {
+    gradient: 'linear-gradient(135deg, rgba(220,60,110,0.18), rgba(24,6,12,0.9))',
+    border: 'border-rose-400/30',
+    text: 'text-rose-300',
+  },
+}
 
 const navLinks = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -108,6 +146,9 @@ export function TopNav() {
   }, [logoutConfirmOpen])
 
   const firstName = profile?.name?.split(' ')[0] || 'Trader'
+  const tier = normalizeTier(profile?.plan)
+  const tierStyle = TIER_STYLES[tier]
+  const TierRowIcon = TIER_ROW_ICONS[tier]
 
   function requestLogout() {
     setLogoutConfirmOpen(true)
@@ -363,23 +404,28 @@ export function TopNav() {
                           )}
                         </button>
                       </section>
-                    </div>
 
-                    {/* footer */}
-                    <div className="mt-6 flex w-full flex-col-reverse items-center gap-3 sm:flex-row sm:justify-between">
-                      <p className="font-display flex items-center gap-1.5 text-xs text-zinc-500">
-                        <ShieldCheck className="h-3.5 w-3.5 text-[#CCFF00]/70" />
-                        Signed in securely
-                      </p>
-                      <button
-                        type="button"
-                        onClick={requestLogout}
-                        data-testid="profile-logout-button"
-                        className="btn-clay-plum font-display inline-flex h-11 w-full items-center justify-center gap-2 px-6 text-sm sm:w-auto"
+                      <section
+                        data-testid="profile-tier-row"
+                        className={`flex min-w-0 items-center gap-3 rounded-2xl border p-3.5 sm:p-4 ${tierStyle.border}`}
+                        style={{ backgroundImage: tierStyle.gradient }}
                       >
-                        <LogOut className="h-4 w-4" />
-                        Log out
-                      </button>
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border bg-[#0A0C08]/70 ${tierStyle.border} ${tierStyle.text}`}
+                        >
+                          <TierRowIcon className="h-4 w-4" />
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-display text-[0.6rem] uppercase tracking-[0.18em] text-zinc-400">
+                            Account tier
+                          </p>
+                          <p
+                            className={`font-display mt-0.5 truncate text-sm font-bold capitalize ${tierStyle.text}`}
+                          >
+                            {profile?.plan || 'free'} plan
+                          </p>
+                        </div>
+                      </section>
                     </div>
                   </div>
                 </div>
