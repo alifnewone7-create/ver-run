@@ -20,11 +20,11 @@ import {
   Mail,
   Copy,
   Check,
-} from 'lucide-react'
+} from '@/components/icons'
 import { useAuth } from '@/components/auth-provider'
 import { cn } from '@/lib/utils'
 import { normalizeTier, type Tier } from '@/lib/tiers'
-import { Gift, Rocket, Star, Crown } from 'lucide-react'
+import { Gift, Rocket, Star, Crown } from '@/components/icons'
 
 const TIER_ROW_ICONS: Record<Tier, typeof Gift> = {
   free: Gift,

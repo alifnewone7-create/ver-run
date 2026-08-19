@@ -20,7 +20,7 @@ import {
   Minus,
   Plus,
   Hash,
-} from 'lucide-react'
+} from '@/components/icons'
 import { TopNav } from '@/components/top-nav'
 import { AuthGuard } from '@/components/auth-guard'
 import { PairFlags } from '@/components/pair-flags'

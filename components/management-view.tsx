@@ -16,8 +16,8 @@ import {
   Layers,
   Lightbulb,
   AlertTriangle,
-  type LucideIcon,
-} from 'lucide-react'
+  type AppIcon as LucideIcon,
+} from '@/components/icons'
 import { cn } from '@/lib/utils'
 import { TopNav } from '@/components/top-nav'
 import { AuthGuard } from '@/components/auth-guard'

@@ -8,8 +8,8 @@ import {
   Radio,
   SlidersHorizontal,
   ArrowUpRight,
-  type LucideIcon,
-} from 'lucide-react'
+  type AppIcon as LucideIcon,
+} from '@/components/icons'
 
 type Tool = {
   name: string

@@ -14,8 +14,8 @@ import {
   ArrowRight,
   Cpu,
   Layers,
-  type LucideIcon,
-} from 'lucide-react'
+  type AppIcon as LucideIcon,
+} from '@/components/icons'
 import { TopNav } from '@/components/top-nav'
 import { TradingChart } from '@/components/trading-chart'
 import { ToolCards } from '@/components/tool-cards'
