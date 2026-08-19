@@ -11,26 +11,19 @@ import {
   RefreshCw,
   Info,
   Lock,
-  Infinity as InfinityIcon,
+  InfinityIcon,
   Clock,
-  type LucideIcon,
-} from 'lucide-react'
+  type AppIcon,
+} from '@/components/icons'
 import { useAuth } from '@/components/auth-provider'
 import { FEATURES, FEATURE_LABEL, TIER_LABEL, type FeatureKey } from '@/lib/tiers'
 import { cn } from '@/lib/utils'
 
-const FEATURE_ICON: Record<FeatureKey, LucideIcon> = {
+const FEATURE_ICON: Record<FeatureKey, AppIcon> = {
   'otc-chart-analyzer': ScanLine,
   'real-chart-analyzer': ScanSearch,
   'future-signals': Telescope,
   'live-signals': Radio,
-}
-
-const FEATURE_COLOR: Record<FeatureKey, string> = {
-  'otc-chart-analyzer': 'var(--primary)',
-  'real-chart-analyzer': 'var(--emerald)',
-  'future-signals': 'var(--gold)',
-  'live-signals': 'var(--primary)',
 }
 
 export function TradingChart() {
@@ -40,7 +33,6 @@ export function TradingChart() {
 
   useEffect(() => setMounted(true), [])
 
-  // Lock body scroll + Escape-to-close while the info dialog is open
   useEffect(() => {
     if (!infoOpen) return
     function onKey(e: KeyboardEvent) {
@@ -55,43 +47,57 @@ export function TradingChart() {
   }, [infoOpen])
 
   return (
-    <div className="border-luxe surface-luxe relative overflow-hidden rounded-[1.75rem] p-6 shadow-xl shadow-primary/10 sm:p-8">
-      {/* ambient glow */}
-      <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-primary/12 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-28 -left-20 h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--emerald)_14%,transparent)] blur-3xl" />
+    <div
+      data-testid="daily-limit-card"
+      className="border-luxe surface-luxe relative flex h-full flex-col overflow-hidden rounded-3xl p-5 sm:p-6"
+    >
+      <span aria-hidden className="welcome-luxe-border rounded-3xl" />
+      {/* top lime glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-20 left-1/2 h-40 w-[22rem] -translate-x-1/2 rounded-full blur-[70px]"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, rgba(204,255,0,0.14), transparent 70%)',
+        }}
+      />
 
       {/* header */}
-      <div className="relative flex items-start justify-between gap-3">
+      <div className="relative z-10 flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[color-mix(in_oklab,var(--primary)_14%,transparent)] to-[color-mix(in_oklab,var(--primary)_10%,transparent)] text-[var(--primary)] ring-1 ring-[color-mix(in_oklab,var(--primary)_14%,transparent)]">
-            <span className="pointer-events-none absolute -right-3 -top-3 h-8 w-8 rounded-full bg-[color-mix(in_oklab,var(--primary)_14%,transparent)] blur-md" />
-            <Gauge className="gauge-needle relative h-5 w-5" />
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#CCFF00]/25 bg-[#0A0C08] text-[#CCFF00] shadow-[0_0_16px_rgba(204,255,0,0.12)]">
+            <Gauge className="h-5 w-5" />
           </span>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <h3 className="text-xl font-semibold tracking-tight">Daily Limit</h3>
-              {/* info dialog trigger */}
+              <h3 className="font-display text-lg font-medium tracking-tight text-white">
+                Daily Limit
+              </h3>
               <button
                 type="button"
                 onClick={() => setInfoOpen(true)}
                 aria-label="How the daily limit resets"
                 aria-haspopup="dialog"
-                className="flex h-6 w-6 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-input/40 hover:text-foreground"
+                data-testid="daily-limit-info-button"
+                className="flex h-6 w-6 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-white/10 hover:text-[#CCFF00]"
               >
                 <Info className="h-4 w-4" />
               </button>
             </div>
-            <p className="text-xs text-muted-foreground">Resets every 24 hours</p>
+            <p className="font-display text-[0.65rem] uppercase tracking-[0.16em] text-zinc-500">
+              Resets every 24 hours
+            </p>
           </div>
         </div>
 
-        {/* tier / quota badge */}
+        {/* quota badge */}
         <span
+          data-testid="daily-limit-badge"
           className={cn(
-            'flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold',
+            'font-display flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.12em]',
             hasAccess
-              ? 'bg-[color-mix(in_oklab,var(--primary)_14%,transparent)] text-[var(--primary)] ring-1 ring-[color-mix(in_oklab,var(--primary)_14%,transparent)]'
-              : 'border border-border/60 bg-input/20 text-muted-foreground',
+              ? 'border-[#CCFF00]/35 bg-[#CCFF00]/10 text-[#CCFF00]'
+              : 'border-rose-400/30 bg-rose-500/10 text-rose-300',
           )}
         >
           {isUnlimited ? (
@@ -113,34 +119,80 @@ export function TradingChart() {
         </span>
       </div>
 
+      {/* divider */}
+      <div
+        aria-hidden
+        className="relative z-10 mt-4 h-px w-full"
+        style={{
+          background:
+            'linear-gradient(90deg, rgba(204,255,0,0.28), rgba(255,255,255,0.05) 55%, transparent)',
+        }}
+      />
+
       {/* body */}
       {loading ? (
-        <ul className="relative mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <ul className="relative z-10 mt-4 flex flex-1 flex-col gap-2.5">
           {FEATURES.map((f) => (
             <li
               key={f}
-              className="h-[104px] animate-pulse rounded-2xl border border-border/60 bg-input/20"
+              className="h-[52px] animate-pulse rounded-xl border border-white/5 bg-white/[0.03]"
             />
           ))}
         </ul>
       ) : !hasAccess ? (
-        /* Free tier: fully locked, no counts */
-        <div className="relative mt-6 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border/70 bg-[linear-gradient(135deg,color-mix(in_oklab,var(--primary)_10%,transparent),transparent)] p-8 text-center">
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl icon-chip">
-            <Lock className="h-5 w-5" />
-          </span>
-          <div>
-            <p className="text-sm font-semibold">Locked on the Free plan</p>
-            <p className="mx-auto mt-1 max-w-xs text-xs leading-relaxed text-muted-foreground">
-              You can browse every page, but generating results is locked. Upgrade
-              to unlock a daily quota across all four tools.
-            </p>
+        /* locked state */
+        <div
+          data-testid="daily-limit-locked"
+          className="relative z-10 mt-4 flex flex-1 flex-col"
+        >
+          <div className="flex flex-col items-center gap-3 rounded-2xl border border-rose-400/20 p-5 text-center"
+            style={{
+              backgroundImage:
+                'linear-gradient(160deg, rgba(220,60,110,0.1), rgba(9,11,6,0.7) 60%)',
+            }}
+          >
+            <span className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-rose-400/30 bg-[#0A0C08] text-rose-300">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -inset-1.5 rounded-2xl bg-rose-500/15 blur-lg"
+              />
+              <Lock className="relative h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-display text-sm font-semibold text-white">
+                Locked on the Free plan
+              </p>
+              <p className="font-display mx-auto mt-1 max-w-xs text-xs font-light leading-relaxed text-zinc-400">
+                Upgrade to unlock a daily quota across all four tools.
+              </p>
+            </div>
           </div>
+
+          {/* locked tools preview */}
+          <ul className="mt-3 flex flex-col gap-2">
+            {FEATURES.map((feature) => {
+              const Icon = FEATURE_ICON[feature]
+              return (
+                <li
+                  key={feature}
+                  className="flex items-center gap-3 rounded-xl border border-white/[0.05] bg-[#0A0C08]/60 px-3 py-2.5 opacity-60"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-400">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <p className="font-display flex-1 truncate text-xs font-medium text-zinc-300">
+                    {FEATURE_LABEL[feature]}
+                  </p>
+                  <Lock className="h-3.5 w-3.5 shrink-0 text-zinc-500" />
+                </li>
+              )
+            })}
+          </ul>
         </div>
       ) : (
-        <ul className="relative mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <ul className="relative z-10 mt-4 flex flex-1 flex-col gap-2.5">
           {FEATURES.map((feature) => (
-            <UsageTile
+            <UsageRow
               key={feature}
               feature={feature}
               used={usage[feature] || 0}
@@ -166,27 +218,27 @@ export function TradingChart() {
               aria-hidden="true"
               tabIndex={-1}
               onClick={() => setInfoOpen(false)}
-              className="animate-in fade-in absolute inset-0 cursor-default bg-background/70 backdrop-blur-sm duration-200"
+              className="absolute inset-0 cursor-default bg-background/75 backdrop-blur-sm"
             />
-            <div className="animate-in fade-in zoom-in-95 border-luxe surface-luxe relative z-10 w-full max-w-sm overflow-hidden rounded-3xl p-6 text-center shadow-2xl shadow-primary/25 duration-200">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl icon-chip">
+            <div className="border-luxe surface-luxe relative z-10 w-full max-w-sm overflow-hidden rounded-3xl p-6 text-center shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
+              <span aria-hidden className="welcome-luxe-border rounded-3xl" />
+              <span className="relative mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-[#CCFF00]/25 bg-[#0A0C08] text-[#CCFF00] shadow-[0_0_18px_rgba(204,255,0,0.12)]">
                 <Clock className="h-7 w-7" />
               </span>
               <h2
                 id="reset-info-title"
-                className="mt-4 text-lg font-bold tracking-tight"
+                className="font-display mt-4 text-lg font-medium tracking-tight text-white"
               >
                 Resets daily at 6:00 AM
               </h2>
-              <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground">
+              <p className="font-display mt-2 text-pretty text-sm font-light leading-relaxed text-zinc-400">
                 Your daily quota refreshes every morning after 6:00 AM Bangladesh
                 Standard Time (UTC+06:00).
               </p>
               <button
                 type="button"
                 onClick={() => setInfoOpen(false)}
-                className="btn-luxe mt-6 flex h-11 w-full items-center justify-center rounded-xl text-sm font-semibold text-primary-foreground"
+                className="btn-luxe font-display mt-6 flex h-11 w-full items-center justify-center text-sm"
               >
                 OK
               </button>
@@ -198,7 +250,7 @@ export function TradingChart() {
   )
 }
 
-function UsageTile({
+function UsageRow({
   feature,
   used,
   limit,
@@ -210,77 +262,61 @@ function UsageTile({
   unlimited: boolean
 }) {
   const Icon = FEATURE_ICON[feature]
-  const color = FEATURE_COLOR[feature]
   const remaining =
     unlimited || limit === null ? null : Math.max(0, limit - used)
-  // Progress fills from low (0 used) to high (limit used)
   const pct =
     unlimited || limit === null || limit === 0
-      ? 0
+      ? 100
       : Math.min(100, Math.round((used / limit) * 100))
   const depleted = remaining !== null && remaining <= 0
 
   return (
     <li
-      className="relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-border/60 p-4 transition-colors hover:border-[color:color-mix(in_oklab,var(--primary)_14%,transparent)]"
-      style={{
-        background: `linear-gradient(135deg, color-mix(in oklab, ${color} 14%, transparent) 0%, color-mix(in oklab, ${color} 4%, transparent) 45%, transparent 100%)`,
-      }}
+      data-testid={`usage-row-${feature}`}
+      className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-[#0A0C08]/70 px-3 py-2.5 transition-colors hover:border-[#CCFF00]/25"
     >
-      <div className="flex items-center justify-between gap-2">
-        <span
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
-          style={{
-            backgroundColor: `color-mix(in oklab, ${color} 20%, transparent)`,
-            color,
-          }}
-        >
-          <Icon className="h-[1.1rem] w-[1.1rem]" />
-        </span>
-        {unlimited ? (
-          <span
-            className="flex items-center gap-1 font-mono text-sm font-bold"
-            style={{ color }}
-          >
-            <InfinityIcon className="h-4 w-4" />
-          </span>
-        ) : (
-          <span
-            className={cn(
-              'shrink-0 font-mono text-sm font-bold tabular-nums',
-              depleted && 'text-down',
-            )}
-            style={depleted ? undefined : { color }}
-          >
-            {used}
-            <span className="text-muted-foreground">/{limit}</span>
-          </span>
+      <span
+        className={cn(
+          'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border',
+          depleted
+            ? 'border-rose-400/25 bg-rose-500/10 text-rose-300'
+            : 'border-[#CCFF00]/25 bg-[#CCFF00]/[0.07] text-[#CCFF00]',
         )}
+      >
+        <Icon className="h-[1.05rem] w-[1.05rem]" />
+      </span>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center justify-between gap-2">
+          <p className="font-display truncate text-xs font-medium text-zinc-200">
+            {FEATURE_LABEL[feature]}
+          </p>
+          {unlimited ? (
+            <InfinityIcon className="h-4 w-4 shrink-0 text-[#CCFF00]" />
+          ) : (
+            <span
+              className={cn(
+                'font-display shrink-0 text-xs font-bold tabular-nums',
+                depleted ? 'text-rose-300' : 'text-[#CCFF00]',
+              )}
+            >
+              {used}
+              <span className="text-zinc-500">/{limit}</span>
+            </span>
+          )}
+        </div>
+        <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-white/[0.07]">
+          <div
+            className="h-full rounded-full transition-all duration-500"
+            style={{
+              width: `${pct}%`,
+              background: depleted
+                ? 'linear-gradient(90deg, rgba(220,60,110,0.7), rgb(244,114,140))'
+                : 'linear-gradient(90deg, rgba(204,255,0,0.45), #CCFF00)',
+            }}
+          />
+        </div>
       </div>
-
-      <p className="truncate text-sm font-medium leading-tight">
-        {FEATURE_LABEL[feature]}
-      </p>
-
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
-        <div
-          className="h-full rounded-full transition-all duration-500"
-          style={{
-            width: `${pct}%`,
-            background: depleted
-              ? 'var(--down)'
-              : `linear-gradient(90deg, color-mix(in oklab, ${color} 55%, transparent), ${color})`,
-          }}
-        />
-      </div>
-
-      <p className="text-[11px] text-muted-foreground">
-        {unlimited
-          ? 'Unlimited generations'
-          : depleted
-            ? 'Daily limit reached'
-            : `${remaining} left today`}
-      </p>
     </li>
   )
 }

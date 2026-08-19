@@ -49,6 +49,8 @@ import {
   Lightbulb as PLightbulb,
   Warning,
   UploadSimple,
+  Lock as PLock,
+  Infinity as PInfinity,
   Scan as PScan,
   TrendUp,
   Pulse,
@@ -146,3 +148,5 @@ export const Mail = d(EnvelopeSimple)
 export const Copy = d(CopySimple)
 export const ArrowUpRight = d(PArrowUpRight)
 export const ArrowRight = d(PArrowRight)
+export const Lock = d(PLock)
+export const InfinityIcon = d(PInfinity)
