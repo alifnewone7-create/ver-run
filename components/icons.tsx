@@ -9,9 +9,9 @@ import {
   Binoculars,
   Broadcast,
   Vault,
-  Gift as PGift,
   Medal,
-  Diamond,
+  Leaf,
+  StarFour,
   SketchLogo,
   ShieldStar,
   Stack,
@@ -87,9 +87,9 @@ export const SlidersHorizontal = d(Faders)
 export const LayoutGrid = d(SquaresFour)
 
 // tiers
-export const Gift = d(PGift)
+export const Gift = d(Leaf)
 export const Rocket = d(Medal)
-export const Star = d(Diamond)
+export const Star = d(StarFour)
 export const Crown = d(SketchLogo)
 export const ShieldCheck = d(ShieldStar)
 
