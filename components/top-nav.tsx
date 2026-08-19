@@ -323,9 +323,9 @@ export function TopNav() {
                       onClick={() => setProfileOpen(false)}
                       aria-label="Close profile"
                       data-testid="profile-close-button"
-                      className="btn-luxe-outline flex h-8 w-8 items-center justify-center"
+                      className="btn-luxe-outline flex h-9 w-9 shrink-0 items-center justify-center"
                     >
-                      <X className="h-4 w-4" strokeWidth={2.25} />
+                      <X className="h-4 w-4" />
                     </button>
                   </div>
 
